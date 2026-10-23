@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "roas",
+    "title": "ROAS Calculator",
+    "category": "Digital Marketing Calculators",
+    "icon": "\u2197",
+    "description": "Measure advertising revenue for every unit of ad spend.",
+    "body": "<p>Calculate return on ad spend (ROAS) to understand how much revenue your advertising generates. Use revenue attributed to the same campaign and period as your spend.</p><div data-tool=\"roas\"></div><h2>How to calculate ROAS</h2><p>Divide attributed revenue by advertising spend. For example, 5,000 in revenue \u00f7 1,000 in spend = 5\u00d7 ROAS, or 500%.</p><p>Use the same currency for both inputs. ROAS measures revenue efficiency; it does not account for product costs, overhead, or net profit.</p>"
+  },
+  {
+    "slug": "profit-margin",
+    "title": "Profit Margin Calculator",
+    "category": "E-commerce Calculators",
+    "icon": "%",
+    "description": "See your profit and margin before making the next move.",
+    "body": "<p>Calculate profit and profit margin from your revenue and total costs. Include the costs relevant to your decision, such as products, shipping, platform fees, and advertising.</p><div data-tool=\"margin\"></div><h2>How to calculate profit margin</h2><p>Profit = revenue \u2212 cost. Profit margin = profit \u00f7 revenue \u00d7 100. For example, 100 revenue and 60 cost gives 40 profit and a 40% margin.</p><p>Use the same currency and period for both inputs. Costs above revenue produce a negative margin. Margin is different from markup, which divides profit by cost.</p>"
+  },
+  {
+    "slug": "print-dpi",
+    "title": "Print DPI Calculator",
+    "category": "Packaging & Printing Tools",
+    "icon": "\u25a7",
+    "description": "Check image resolution at your intended print size.",
+    "body": "<p>Estimate horizontal and vertical image resolution from pixel dimensions and physical print size. This is pixels per inch (PPI), commonly called print DPI. It does not measure a printer\u2019s ink dots.</p><div data-tool=\"dpi\"></div><h2>How to calculate print resolution</h2><p>Divide each pixel dimension by its print dimension in inches. For example, 3,000 \u00d7 2,400 pixels printed at 10 \u00d7 8 inches gives 300 PPI on both axes. Centimeters are converted using 2.54 cm per inch.</p><p>Around 300 PPI is a common starting point for close-viewed prints; requirements depend on the printer, material, and viewing distance. Different horizontal and vertical values may indicate an aspect-ratio mismatch. Confirm cropping or stretching with your printer.</p>"
+  }
+]
