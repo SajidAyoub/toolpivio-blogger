@@ -64,7 +64,7 @@ def read_page_files():
             raise SystemExit(f"Empty page: {filename}")
         if marker and f'data-tool="{marker}"' not in html:
             raise SystemExit(f"Missing calculator marker in {filename}")
-        pages.append((title, html, expected_path))
+        pages.append((title, html, expected_path, filename))
     return pages
 
 
@@ -90,6 +90,7 @@ def main():
     parser.add_argument("--apply", action="store_true", help="Create missing pages")
     parser.add_argument("--replace-existing", action="store_true", help="Update matching pages")
     parser.add_argument("--blog-url", default=BLOG_URL)
+    parser.add_argument("--only-file", action="append", default=[], help="Sync only this known pages/*.html source; repeatable")
     args = parser.parse_args()
     if args.replace_existing and not args.apply:
         parser.error("--replace-existing requires --apply")
@@ -98,6 +99,12 @@ def main():
         print("OAuth complete. Token saved locally (ignored by Git).")
         return
     new_pages = read_page_files()
+    if args.only_file:
+        allowed = {item[1] for item in PAGES}
+        unknown = set(args.only_file) - allowed
+        if unknown:
+            raise SystemExit(f"Unrecognized page filename(s): {sorted(unknown)}")
+        new_pages = [page for page in new_pages if page[3] in set(args.only_file)]
     service = build("blogger", "v3", credentials=load_auth(), cache_discovery=False)
     blog = service.blogs().getByUrl(url=args.blog_url).execute()
     if urlparse(args.blog_url).hostname != urlparse(blog.get("url", "")).hostname:
@@ -107,7 +114,7 @@ def main():
     known = {}
     for p in existing_pages(service, blog_id):
         known.setdefault(p["title"].strip().casefold(), []).append(p)
-    for title, html, expected_path in new_pages:
+    for title, html, expected_path, filename in new_pages:
         found = known.get(title.casefold(), [])
         if len(found) > 1:
             raise SystemExit(f"Safety stop: duplicate existing pages named {title!r}")
