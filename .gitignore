@@ -1,0 +1,8 @@
+work/
+node_modules/
+__pycache__/
+
+# Blogger OAuth secrets
+secrets/
+local_backups/
+.env

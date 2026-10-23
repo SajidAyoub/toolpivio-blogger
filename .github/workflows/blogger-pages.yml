@@ -1,0 +1,38 @@
+name: Publish ToolPivio Blogger Pages
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "preview is read-only; apply creates missing pages; replace updates matching titles"
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - apply
+          - replace
+jobs:
+  blogger:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -r requirements-blogger.txt
+      - name: Blogger page sync
+        env:
+          BLOGGER_AUTH_JSON: ${{ secrets.BLOGGER_AUTH_JSON }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          if [ -z "$BLOGGER_AUTH_JSON" ]; then
+            echo "Missing encrypted Actions secret BLOGGER_AUTH_JSON"
+            exit 1
+          fi
+          case "$MODE" in
+            replace) python tools/blogger_publish.py sync --apply --replace-existing ;;
+            apply) python tools/blogger_publish.py sync --apply ;;
+            *) python tools/blogger_publish.py sync ;;
+          esac
