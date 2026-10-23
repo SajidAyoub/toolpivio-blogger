@@ -7,30 +7,70 @@ on:
         required: true
         default: preview
         type: choice
-        options:
-          - preview
-          - apply
-          - replace
+        options: [preview, apply, replace]
+  push:
+    branches: [main]
+    paths:
+      - 'pages/**'
 jobs:
-  blogger:
+  validate:
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
+      - run: npm run build && npm test
+      - run: git diff --exit-code -- dist
+  blogger:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - run: python -m pip install -r requirements-blogger.txt
-      - name: Blogger page sync
+      - name: Publish changed pages on approved main push
+        if: github.event_name == 'push'
+        env:
+          BLOGGER_AUTH_JSON: ${{ secrets.BLOGGER_AUTH_JSON }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: |
+          if [ -z "$BLOGGER_AUTH_JSON" ]; then echo "Missing BLOGGER_AUTH_JSON"; exit 1; fi
+          python - <<'PY'
+          import os, subprocess, sys
+          allowed = {'pages/roas.html','pages/profit-margin.html','pages/print-dpi.html','pages/about.html','pages/contact.html','pages/privacy-policy.html','pages/terms.html'}
+          prior = os.environ['BEFORE_SHA']
+          after = os.environ['AFTER_SHA']
+          result = subprocess.run(['git','diff','--name-only',prior,after,'--','pages/'], capture_output=True, text=True, check=True)
+          changed = sorted(set(result.stdout.splitlines()) & allowed)
+          if not changed:
+              print("No recognized page content changed; no Blogger write")
+              sys.exit(0)
+          print("Updating only:", ', '.join(changed))
+          cmd = [sys.executable,'tools/blogger_publish.py','sync','--apply','--replace-existing']
+          for path in changed:
+              cmd += ['--only-file',path]
+          subprocess.run(cmd,check=True)
+          PY
+      - name: Manual Blogger page sync
+        if: github.event_name == 'workflow_dispatch'
         env:
           BLOGGER_AUTH_JSON: ${{ secrets.BLOGGER_AUTH_JSON }}
           MODE: ${{ inputs.mode }}
         run: |
-          if [ -z "$BLOGGER_AUTH_JSON" ]; then
-            echo "Missing encrypted Actions secret BLOGGER_AUTH_JSON"
-            exit 1
-          fi
+          if [ -z "$BLOGGER_AUTH_JSON" ]; then echo "Missing BLOGGER_AUTH_JSON"; exit 1; fi
           case "$MODE" in
             replace) python tools/blogger_publish.py sync --apply --replace-existing ;;
             apply) python tools/blogger_publish.py sync --apply ;;
