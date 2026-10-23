@@ -70,7 +70,7 @@ def read_page_files():
 
 def existing_pages(service, blog_id):
     pages = []
-    for status in ("live", "draft"):
+    for status in ("LIVE", "DRAFT"):
         token = None
         while True:
             result = service.pages().list(
