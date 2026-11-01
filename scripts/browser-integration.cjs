@@ -23,7 +23,7 @@ const files = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/file-tools.json'))
       const relative = decodeURIComponent(url.pathname.slice(prefix.length)) || 'index.html';
       const target = path.resolve(ROOT, 'docs', relative);
       if (!target.startsWith(path.join(ROOT, 'docs') + path.sep) || !fs.existsSync(target)) throw Error('Missing generated asset: ' + relative);
-      const contentType = target.endsWith('.js') ? 'text/javascript' : target.endsWith('.xml') ? 'application/xml' : 'text/html';
+      const contentType = target.endsWith('.js') ? 'text/javascript' : target.endsWith('.svg') ? 'image/svg+xml' : target.endsWith('.css') ? 'text/css' : target.endsWith('.xml') ? 'application/xml' : 'text/html';
       return route.fulfill({contentType,body:fs.readFileSync(target)});
     });
     await page.goto(origin + prefix);
