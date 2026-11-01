@@ -4,7 +4,7 @@ The live baseline is the owner's working V3 Blogger theme. V4 is a reviewed upgr
 
 ## Review and merge order
 
-Review the four PRs separately in their documented dependency order, using **Create a merge commit**. Do not enable automatic merging. The release report supplies their final PR links.
+Review [#9 cards](https://github.com/SajidAyoub/toolpivio-blogger/pull/9), [#10 banners](https://github.com/SajidAyoub/toolpivio-blogger/pull/10), [#11 contact](https://github.com/SajidAyoub/toolpivio-blogger/pull/11), and [#12 SEO/release](https://github.com/SajidAyoub/toolpivio-blogger/pull/12), in that order, using **Create a merge commit**. Do not enable automatic merging. All target `main`; later branches include the preceding phase so they can be tested as a complete build. The PR descriptions link to focused phase comparisons.
 
 1. **Cards and V4 theme:** whole-card navigation, arrow rendering, nineteen original ghost visuals, focus/touch states and theme output.
 2. **Page banners:** nineteen tool banners, four informational-page banners and related-tool presentation. Review generated Blogger body updates, including the explicit rebuild of the three established bodies.

@@ -1,6 +1,6 @@
 # V4 SEO audit and owner checklist
 
-This audit covers repository source and locally generated documents on November 1, 2026. It does not report live response codes, indexing, Google-selected canonicals, rankings, Search Console access or field performance. The owner confirmed V3 installation, a homepage with nineteen cards and successful use of most tools; that is separate from this source audit. Read the current production override in `AGENTS.md` before interpreting historical V2/V3 installation notes.
+This audit covers repository source and locally generated documents on November 2, 2026. It does not report live response codes, indexing, Google-selected canonicals, rankings, Search Console access or field performance. The owner confirmed V3 installation, a homepage with nineteen cards and successful use of most tools; that is separate from this source audit. Read the current production override in `AGENTS.md` before interpreting historical V2/V3 installation notes.
 
 ## Source findings
 

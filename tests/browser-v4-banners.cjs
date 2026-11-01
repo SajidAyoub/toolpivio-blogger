@@ -48,6 +48,17 @@ function fixture(id,file) {
       assert.ok(await banner.locator('img').evaluate(img=>img.complete&&img.naturalWidth>0),item.id+' artwork loads');
       assert.ok(await page.locator('.post-body').isVisible(),item.id+' native-class body visible');
       assert.equal(await page.locator('.tp-page-back-link').count(),1,item.id+' useful return CTA');
+      if(item.id==='contact'&&await page.locator('iframe[data-toolpivio-contact]').count()){
+        const contact=page.frameLocator('iframe[data-toolpivio-contact]');
+        await contact.locator('#contact-form').waitFor();
+        await page.waitForFunction(()=>document.querySelector('iframe[data-toolpivio-contact]').getAttribute('height')!=='1400');
+        assert.ok(await contact.locator('main').evaluate(el=>el.getBoundingClientRect().height<=innerHeight+2),'contact iframe fits real content');
+        const height=await page.locator('iframe').getAttribute('height');
+        await page.evaluate(()=>window.dispatchEvent(new MessageEvent('message',{origin:'https://evil.example',source:document.querySelector('iframe').contentWindow,data:{type:'ToolPivio:resize',height:3333}})));
+        assert.equal(await page.locator('iframe').getAttribute('height'),height,'foreign origin cannot resize contact');
+        await page.evaluate(()=>window.dispatchEvent(new MessageEvent('message',{origin:'https://sajidayoub.github.io',source:window,data:{type:'ToolPivio:resize',height:3333}})));
+        assert.equal(await page.locator('iframe').getAttribute('height'),height,'wrong window cannot resize contact');
+      }
       for(const width of widths){
         await page.setViewportSize({width,height:1000});
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),item.id+' '+width+' fixture overflow');
