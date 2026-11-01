@@ -1,0 +1,163 @@
+{
+  "roas": {
+    "title": "ROAS Calculator",
+    "category": "Digital Marketing Calculators",
+    "benefit": "Put campaign revenue in perspective.",
+    "description": "A rising advertising revenue chart beside a compact teal calculator.",
+    "artwork": "roas.svg"
+  },
+  "margin": {
+    "title": "Profit Margin Calculator",
+    "category": "E-commerce Calculators",
+    "benefit": "See what remains after your costs.",
+    "description": "A profit share ring beside two stacks of coins.",
+    "artwork": "margin.svg"
+  },
+  "dpi": {
+    "title": "Print DPI Calculator",
+    "category": "Packaging & Printing Tools",
+    "benefit": "Match image detail to your print size.",
+    "description": "A print layout with a magnifying lens revealing its pixel grid.",
+    "artwork": "dpi.svg"
+  },
+  "cpc": {
+    "title": "CPC Calculator",
+    "category": "Digital Marketing Calculators",
+    "benefit": "Know what each advertising click costs.",
+    "description": "A pointer activating an advertising card beside a cost coin.",
+    "artwork": "cpc.svg"
+  },
+  "cpm": {
+    "title": "CPM Calculator",
+    "category": "Digital Marketing Calculators",
+    "benefit": "Compare the cost of a thousand impressions.",
+    "description": "A grid of advertising cards with an eye representing repeated impressions.",
+    "artwork": "cpm.svg"
+  },
+  "ctr": {
+    "title": "CTR Calculator",
+    "category": "Digital Marketing Calculators",
+    "benefit": "Turn clicks and impressions into a clear rate.",
+    "description": "A field of impression markers with selected clicks and a percentage dial.",
+    "artwork": "ctr.svg"
+  },
+  "cpa": {
+    "title": "CPA Calculator",
+    "category": "Digital Marketing Calculators",
+    "benefit": "Understand the cost of each conversion.",
+    "description": "An advertising funnel leading to a customer and a cost coin.",
+    "artwork": "cpa.svg"
+  },
+  "discount": {
+    "title": "Discount Calculator",
+    "category": "E-commerce Calculators",
+    "benefit": "Find the sale price and your savings.",
+    "description": "A sale ticket with a percentage symbol beside a hanging price tag.",
+    "artwork": "discount.svg"
+  },
+  "markup": {
+    "title": "Markup Calculator",
+    "category": "E-commerce Calculators",
+    "benefit": "Price with a clearer view of cost.",
+    "description": "Three ascending cost and sale-price blocks beneath an upward arrow.",
+    "artwork": "markup.svg"
+  },
+  "break-even": {
+    "title": "Break-even Calculator",
+    "category": "E-commerce Calculators",
+    "benefit": "Find the sales volume that covers your costs.",
+    "description": "Revenue and total-cost lines meeting at a highlighted break-even point.",
+    "artwork": "break-even.svg"
+  },
+  "bleed-trim": {
+    "title": "Bleed & Trim Calculator",
+    "category": "Packaging & Printing Tools",
+    "benefit": "Allow the right space beyond the cut.",
+    "description": "A print artwork showing outer bleed, inner trim, and crop marks.",
+    "artwork": "bleed-trim.svg"
+  },
+  "print-size": {
+    "title": "Print Size Converter",
+    "category": "Packaging & Printing Tools",
+    "benefit": "Connect pixels with real print dimensions.",
+    "description": "An image frame beside horizontal and vertical rulers with conversion arrows.",
+    "artwork": "print-size.svg"
+  },
+  "video-size": {
+    "title": "Video File Size & Bitrate Calculator",
+    "category": "Video Production Calculators",
+    "benefit": "Plan your video size or bitrate budget.",
+    "description": "A video playback panel beside a storage drive and bitrate bars.",
+    "artwork": "video-size.svg"
+  },
+  "frames-duration": {
+    "title": "Frames & Duration Converter",
+    "category": "Video Production Calculators",
+    "benefit": "Move between frame counts and running time.",
+    "description": "A sequence of film frames beside a clock measuring elapsed time.",
+    "artwork": "frames-duration.svg"
+  },
+  "image-resizer": {
+    "title": "Image Resizer",
+    "category": "Image & PDF Tools",
+    "benefit": "Set the pixel dimensions your project needs.",
+    "description": "Nested image frames with arrows marking a change in dimensions.",
+    "artwork": "image-resizer.svg"
+  },
+  "image-compressor": {
+    "title": "Image Compressor",
+    "category": "Image & PDF Tools",
+    "benefit": "Compare image quality and file size.",
+    "description": "A picture between inward arrows beside a smaller output image.",
+    "artwork": "image-compressor.svg"
+  },
+  "image-converter": {
+    "title": "Image Format Converter",
+    "category": "Image & PDF Tools",
+    "benefit": "Choose a format that fits your next step.",
+    "description": "Two image cards connected by circular format-conversion arrows.",
+    "artwork": "image-converter.svg"
+  },
+  "images-to-pdf": {
+    "title": "Images to PDF",
+    "category": "Image & PDF Tools",
+    "benefit": "Bring your images together, one page at a time.",
+    "description": "Two image thumbnails flowing into a multipage document.",
+    "artwork": "images-to-pdf.svg"
+  },
+  "pdf-merge": {
+    "title": "PDF Merger",
+    "category": "Image & PDF Tools",
+    "benefit": "Keep your documents together and in order.",
+    "description": "Two separate documents gathering into one ordered document stack.",
+    "artwork": "pdf-merge.svg"
+  },
+  "about": {
+    "title": "About ToolPivio",
+    "category": "About ToolPivio",
+    "benefit": "Useful tools for thoughtful everyday decisions.",
+    "description": "A teal toolkit with a calculator, ruler, and open carrying handle.",
+    "artwork": "about.svg"
+  },
+  "contact": {
+    "title": "Contact ToolPivio",
+    "category": "Get in touch",
+    "benefit": "Share a question, report, or suggestion.",
+    "description": "An open envelope beneath a message bubble.",
+    "artwork": "contact.svg"
+  },
+  "privacy-policy": {
+    "title": "Privacy Policy",
+    "category": "Your information",
+    "benefit": "Understand how your information is handled.",
+    "description": "A shield and padlock beside a device containing abstract data lines.",
+    "artwork": "privacy-policy.svg"
+  },
+  "terms": {
+    "title": "Terms of Use",
+    "category": "Using ToolPivio",
+    "benefit": "Know the terms before using the tools.",
+    "description": "An agreement document beside a teal pen.",
+    "artwork": "terms.svg"
+  }
+}
