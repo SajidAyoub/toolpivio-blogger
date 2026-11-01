@@ -190,6 +190,10 @@
       {
         "question": "Should I include audio bitrate?",
         "answer": "Yes. Use the combined average bitrate of the video, audio and any other streams for a closer estimate. Variable bitrate and container overhead can change the final file size."
+      },
+      {
+        "question": "What is the difference between Mbps, MB and MiB?",
+        "answer": "Mbps measures millions of bits per second. A byte contains eight bits; MB means 1,000,000 bytes and MiB means 1,048,576 bytes. This tool labels its decimal file-size estimate in MB and also shows MiB, so compare like units when checking a download limit."
       }
     ]
   },
@@ -232,6 +236,10 @@
       {
         "question": "Why can the compressed image be larger?",
         "answer": "A small or already optimized original may encode less efficiently with the selected settings. Check the measured output size; a quality setting cannot guarantee a smaller file."
+      },
+      {
+        "question": "Can I guarantee an output below an exact file-size limit?",
+        "answer": "No. This tool adjusts encoding quality rather than targeting a specific number of bytes. Process the image, compare the measured output size with your limit and try a lower quality if needed. Dimensions stay the same; use the image resizer first if reducing dimensions is acceptable."
       }
     ]
   },
@@ -260,6 +268,10 @@
       {
         "question": "Will this make scanned text searchable?",
         "answer": "No. This places image content on PDF pages. It does not perform optical character recognition or turn image text into selectable text."
+      },
+      {
+        "question": "Are my images cropped or kept transparent in the PDF?",
+        "answer": "Each image is fitted proportionally inside the chosen page margins without cropping. The image is converted to JPEG on a white background, so transparent areas become white. Check the downloaded PDF before printing or sharing it."
       }
     ]
   },
