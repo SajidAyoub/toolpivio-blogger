@@ -12,8 +12,8 @@ jobs:
         with:
           python-version: '3.x'
       - run: npm ci
+      - run: python -m pip install -r requirements-test.txt
       - run: npx playwright install --with-deps chromium
       - run: npm run build && npm test
       - run: npm run test:browser
-      - run: git diff --exit-code -- dist releases docs/index.html docs/catalog.v3.js docs/embed.html
-      - run: python scripts/build_embed.py && git diff --exit-code -- docs/embed.html
+      - run: git diff --exit-code -- dist releases docs pages

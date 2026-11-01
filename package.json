@@ -2,11 +2,13 @@
   "name": "toolpivio-blogger",
   "private": true,
   "scripts": {
-    "build": "python3 scripts/build.py && python3 scripts/build_embed.py",
-    "test": "node --test tests/*.test.cjs && python3 scripts/validate.py",
-    "test:browser": "node scripts/browser-smoke.cjs"
+    "build": "python3 scripts/build.py && python3 scripts/build_embed.py && python3 scripts/build_seo.py",
+    "test": "node --test tests/*.test.cjs && python3 scripts/validate.py && python3 -m unittest discover -s tests -p '*_test.py' && python3 tools/page_registry.py",
+    "test:browser": "node scripts/browser-smoke.cjs && node scripts/browser-numeric.cjs && node tests/image-browser.cjs && node scripts/browser-integration.cjs"
   },
   "devDependencies": {
-    "playwright": "1.62.1"
+    "pdf-lib": "1.17.1",
+    "playwright": "1.62.1",
+    "sharp": "0.35.5"
   }
 }

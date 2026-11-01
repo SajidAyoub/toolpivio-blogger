@@ -1,0 +1,123 @@
+[
+  {
+    "id": "cpc",
+    "title": "CPC Calculator",
+    "category": "Digital Marketing Calculators",
+    "icon": "↗",
+    "description": "Find the average cost of each advertising click.",
+    "formula": "CPC = advertising spend ÷ clicks.",
+    "example": "A campaign spending 1,000 for 500 clicks has an average CPC of 2.",
+    "limitations": "Enter spend and clicks from the same campaign, currency and reporting period. Average CPC does not predict an individual auction price.",
+    "slug": "cpc"
+  },
+  {
+    "id": "cpm",
+    "title": "CPM Calculator",
+    "category": "Digital Marketing Calculators",
+    "icon": "◉",
+    "description": "Compare advertising costs per thousand impressions.",
+    "formula": "CPM = advertising spend ÷ impressions × 1,000.",
+    "example": "A spend of 1,000 and 200,000 impressions gives a CPM of 5.",
+    "limitations": "Use served impressions rather than reach. Repeated displays count as separate impressions; viewable CPM may use a different denominator.",
+    "slug": "cpm"
+  },
+  {
+    "id": "ctr",
+    "title": "CTR Calculator",
+    "category": "Digital Marketing Calculators",
+    "icon": "◎",
+    "description": "Measure the percentage of impressions that produce clicks.",
+    "formula": "CTR (%) = clicks ÷ impressions × 100.",
+    "example": "500 clicks from 20,000 impressions produces a 2.5% click-through rate.",
+    "limitations": "Use consistent click and impression definitions. Repeated clicks can make this arithmetic ratio exceed 100%; compare like-for-like reporting metrics.",
+    "slug": "ctr"
+  },
+  {
+    "id": "cpa",
+    "title": "CPA Calculator",
+    "category": "Digital Marketing Calculators",
+    "icon": "◇",
+    "description": "Work out your advertising cost for each conversion.",
+    "formula": "CPA = advertising spend ÷ attributed acquisitions.",
+    "example": "A spend of 1,000 for 50 acquisitions produces a CPA of 20.",
+    "limitations": "Define the conversion event before comparing campaigns. This advertising metric excludes fulfillment costs and attribution outside your chosen reporting window.",
+    "slug": "cpa"
+  },
+  {
+    "id": "discount",
+    "title": "Discount Calculator",
+    "category": "E-commerce Calculators",
+    "icon": "%",
+    "description": "Calculate sale price and savings from a percentage discount.",
+    "formula": "Savings = original price × discount ÷ 100. Sale price = original price − savings.",
+    "example": "An 80 item with a 25% discount saves 20 and has a sale price of 60.",
+    "limitations": "Accepts discounts from 0% to 100%. Tax, shipping, currency rounding and stacked promotions are excluded.",
+    "slug": "discount"
+  },
+  {
+    "id": "markup",
+    "title": "Markup Calculator",
+    "category": "E-commerce Calculators",
+    "icon": "＋",
+    "description": "See your markup on cost and profit per item.",
+    "formula": "Markup (%) = (selling price − unit cost) ÷ unit cost × 100.",
+    "example": "Buying an item for 60 and selling it for 100 produces 40 profit and 66.6667% markup.",
+    "limitations": "Markup uses cost as the denominator; profit margin uses revenue. Include the costs relevant to your decision. Selling below cost produces a negative markup.",
+    "slug": "markup"
+  },
+  {
+    "id": "break-even",
+    "title": "Break-even Calculator",
+    "category": "E-commerce Calculators",
+    "icon": "⚖",
+    "description": "Estimate the whole units needed to cover fixed costs.",
+    "formula": "Break-even units = fixed costs ÷ (selling price per unit − variable cost per unit), rounded upward.",
+    "example": "Fixed costs of 1,000, a selling price of 25 and variable cost of 15 require 100 units to break even.",
+    "limitations": "Assumes constant unit price and costs and that all units sell. A price at or below variable cost has no finite break-even point. Taxes and changes in capacity are excluded.",
+    "slug": "break-even"
+  },
+  {
+    "id": "bleed-trim",
+    "title": "Bleed & Trim Calculator",
+    "category": "Packaging & Printing Tools",
+    "icon": "▣",
+    "description": "Add bleed to final trim dimensions before print export.",
+    "formula": "Artwork width = trim width + 2 × bleed per edge; the same formula applies to height.",
+    "example": "A 210 × 297 mm trim with 3 mm bleed on every edge needs 216 × 303 mm artwork.",
+    "limitations": "This calculates dimensions only and does not edit artwork or add crop marks. Ask your printer about bleed, safe zones and binding allowances.",
+    "slug": "bleed-trim"
+  },
+  {
+    "id": "print-size",
+    "title": "Print Size Converter",
+    "category": "Packaging & Printing Tools",
+    "icon": "▤",
+    "description": "Convert image and print dimensions between pixels, inches, centimeters and millimeters.",
+    "formula": "Inches = millimeters ÷ 25.4. Pixels = inches × pixels per inch (PPI).",
+    "example": "At 300 PPI, an image measuring 3,000 × 2,400 pixels converts to 10 × 8 inches or 254 × 203.2 mm.",
+    "limitations": "PPI relates image pixels to physical size and is distinct from a printer’s ink-dot DPI. This converter does not resample an image. Pixel results show exact values and nearest whole pixels.",
+    "slug": "print-size"
+  },
+  {
+    "id": "video-size",
+    "title": "Video File Size & Bitrate Calculator",
+    "category": "Video Production Calculators",
+    "icon": "▷",
+    "description": "Estimate video file size or calculate a video bitrate budget.",
+    "formula": "File bytes = duration in seconds × (video Mbps + audio kbps ÷ 1,000) × 1,000,000 ÷ 8. Target video Mbps = target MB × 8 ÷ seconds − audio Mbps.",
+    "example": "A 60-second video at 8 Mbps plus 128 kbps audio is about 60.96 MB, or 58.136 MiB. A 60.96 MB target gives an 8 Mbps video budget.",
+    "limitations": "Uses decimal MB and Mbps, with MiB also shown for size estimates. Assumes average bitrates; container overhead, variable-rate peaks and encoding quality affect real files. This tool does not encode or upload video.",
+    "slug": "video-size"
+  },
+  {
+    "id": "frames-duration",
+    "title": "Frames & Duration Converter",
+    "category": "Video Production Calculators",
+    "icon": "▥",
+    "description": "Convert frame counts to seconds and durations to whole frames.",
+    "formula": "Duration in seconds = total frames ÷ frame rate. Frames = duration × frame rate, rounded to the nearest whole frame.",
+    "example": "300 frames at 30 frames per second last 10 seconds. At 29.97 fps, the same 300 frames last about 10.0100 seconds.",
+    "limitations": "Uses a constant decimal frame rate and seconds, not drop-frame timecode. Enter the actual rate used by your project; 29.97 and 30 fps are different rates.",
+    "slug": "frames-duration"
+  }
+]

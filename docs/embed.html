@@ -4,7 +4,7 @@
 /* V3 calculator visual layer, shared by standalone and embedded forms. */
 .calculator{border-color:#d6e4e5;box-shadow:0 4px 18px #12283e04}.calculator label{font-size:13px;letter-spacing:.1px}.calculator input,.calculator select{min-height:46px;border-color:#b8cbd3}.calculator input:focus,.calculator select:focus{border-color:#087f75}.calculator .result{border:1px solid #c7e4d5;background:#edf8f1;line-height:1.85}.calculator .error:empty{margin:0}.calculator .actions{flex-wrap:wrap}.calculator button{min-height:44px}.calculator>p:last-child{font-size:12px;color:#526579}.embed-wrap{box-sizing:border-box}.embed-wrap .fields>div{min-width:0}
 
-body{background:#fff;margin:0;min-width:280px;font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif} .embed-wrap{max-width:900px;margin:0 auto;padding:14px 6px 30px} .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.embed-wrap h2{font-size:23px;color:#12283e;margin:0 0 6px}.embed-wrap>p{font-size:14px;color:#526579;margin:0 0 8px}.embed-wrap .calculator{margin:12px 0 0;padding:22px;border:1px solid #dae4e9} .embed-wrap .result{margin-top:12px}.embed-wrap .fields{gap:14px} .embed-wrap input,.embed-wrap select{padding:10px 12px} .embed-wrap .actions{margin-top:16px} @media (max-width:650px){.embed-wrap{padding:8px 2px 20px}.embed-wrap .fields{grid-template-columns:1fr}.embed-wrap .calculator{padding:14px}.embed-wrap h2{font-size:20px}}</style></head><body><main class="embed-wrap"><h2 class="visually-hidden" id="tool-title">Calculator</h2><p id="tool-help">Enter your values to calculate.</p><div id="calculator-host"></div></main><script>(function(){const options={"roas": ["ROAS Calculator", "Measure advertising revenue relative to ad spend. Use the same currency for both values."], "margin": ["Profit Margin Calculator", "Estimate profit and margin after relevant costs. Use the same currency for both values."], "dpi": ["Print Resolution Calculator", "Check image resolution at a chosen print size (PPI, often called print DPI)."]};const selected=new URLSearchParams(location.search).get('tool')||'roas';if(!Object.prototype.hasOwnProperty.call(options,selected)){document.getElementById('tool-title').textContent='Tool unavailable';document.getElementById('tool-help').textContent='This tool could not be found. Please choose a tool from the catalog.';document.title='Tool unavailable | ToolPivio';return;}const key=selected;document.getElementById('tool-title').textContent=options[key][0];document.getElementById('tool-help').textContent=options[key][1];document.getElementById('calculator-host').setAttribute('data-tool',key);document.title=options[key][0]+' | ToolPivio';})();</script><script>/* Shared by the theme and Node tests. No network requests. */
+body{background:#fff;margin:0;min-width:280px;font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif} .embed-wrap{max-width:900px;margin:0 auto;padding:14px 6px 30px} .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.embed-wrap h2{font-size:23px;color:#12283e;margin:0 0 6px}.embed-wrap>p{font-size:14px;color:#526579;margin:0 0 8px}.embed-wrap .calculator{margin:12px 0 0;padding:22px;border:1px solid #dae4e9} .embed-wrap .result{margin-top:12px}.embed-wrap .fields{gap:14px} .embed-wrap input,.embed-wrap select{padding:10px 12px} .embed-wrap .actions{margin-top:16px} @media (max-width:650px){.embed-wrap{padding:8px 2px 20px}.embed-wrap .fields{grid-template-columns:1fr}.embed-wrap .calculator{padding:14px}.embed-wrap h2{font-size:20px}}</style></head><body><main class="embed-wrap"><h2 class="visually-hidden" id="tool-title">Calculator</h2><p id="tool-help">Enter your values to calculate.</p><div id="calculator-host"></div></main><script>(function(){const options={"roas": ["ROAS Calculator", "Measure advertising revenue for every unit of ad spend."], "margin": ["Profit Margin Calculator", "See your profit and margin before making the next move."], "dpi": ["Print DPI Calculator", "Check image resolution at your intended print size."], "cpc": ["CPC Calculator", "Find the average cost of each advertising click."], "cpm": ["CPM Calculator", "Compare advertising costs per thousand impressions."], "ctr": ["CTR Calculator", "Measure the percentage of impressions that produce clicks."], "cpa": ["CPA Calculator", "Work out your advertising cost for each conversion."], "discount": ["Discount Calculator", "Calculate sale price and savings from a percentage discount."], "markup": ["Markup Calculator", "See your markup on cost and profit per item."], "break-even": ["Break-even Calculator", "Estimate the whole units needed to cover fixed costs."], "bleed-trim": ["Bleed & Trim Calculator", "Add bleed to final trim dimensions before print export."], "print-size": ["Print Size Converter", "Convert image and print dimensions between pixels, inches, centimeters and millimeters."], "video-size": ["Video File Size & Bitrate Calculator", "Estimate video file size or calculate a video bitrate budget."], "frames-duration": ["Frames & Duration Converter", "Convert frame counts to seconds and durations to whole frames."], "image-resizer": ["Image Resizer", "Resize JPG, PNG, and WebP images to exact pixel dimensions with an optional aspect-ratio lock."], "image-compressor": ["Image Compressor", "Re-encode an image as JPG or WebP with a quality setting, preview, and an honest before-and-after size comparison."], "image-converter": ["Image Format Converter", "Convert between JPG, PNG, and WebP in your browser, then preview and download the converted image."], "images-to-pdf": ["Images to PDF", "Combine JPG, PNG, and WebP images into one downloadable PDF with one image per page."], "pdf-merge": ["PDF Merger", "Merge PDF pages locally into a single PDF, keeping the file order shown before processing."]};const selected=new URLSearchParams(location.search).get('tool')||'roas';if(!Object.prototype.hasOwnProperty.call(options,selected)){document.getElementById('tool-title').textContent='Tool unavailable';document.getElementById('tool-help').textContent='This tool could not be found. Please choose a tool from the catalog.';document.title='Tool unavailable | ToolPivio';return;}const key=selected;document.getElementById('tool-title').textContent=options[key][0];document.getElementById('tool-help').textContent=options[key][1];document.getElementById('calculator-host').setAttribute('data-tool',key);document.title=options[key][0]+' | ToolPivio';})();</script><script>/* Pure client-side calculations, shared by browser tools and Node tests. */
 (function(root) {
 'use strict';
 function number(value, positive=false) {
@@ -13,37 +13,274 @@ function number(value, positive=false) {
  if (!Number.isFinite(n) || n<0 || (positive && n===0)) throw new Error(positive?'Enter a number greater than zero.':'Enter a number of zero or more.');
  return n;
 }
+function count(value,positive=false) { const n=number(value,positive);if(!Number.isSafeInteger(n))throw new Error('Counts and pixel dimensions must be safe whole numbers.');return n; }
 function finite(values) { if(Object.values(values).some(v=>!Number.isFinite(v))) throw new Error('These values are too large or too small. Use a smaller range.'); return values; }
+function choice(value,choices) { if(!choices.includes(value))throw new Error('Choose a supported unit or conversion.');return value; }
+const inches={in:1,cm:1/2.54,mm:1/25.4};
+// Exact decimal scaling avoids rounding 0.3 - 0.2 below 0.1 before ceil.
+// It also preserves a legitimate amount just above an integer boundary.
+function decimalParts(n) {const [mantissa,exponent='0']=String(n).split('e');const fraction=(mantissa.split('.')[1]||'').length;return {digits:BigInt(mantissa.replace('.','')),power:Number(exponent)-fraction};}
+function breakEvenWhole(fixed,price,cost) {const parts=[fixed,price,cost].map(decimalParts);const scale=Math.min(...parts.map(p=>p.power));const [f,p,c]=parts.map(part=>part.digits*10n**BigInt(part.power-scale));const contribution=p-c;return Number((f+contribution-1n)/contribution);}
 const api={
  roas(revenue,spend) { revenue=number(revenue);spend=number(spend,true);return finite({roas:revenue/spend,percentage:revenue/spend*100}); },
  margin(revenue,cost) { revenue=number(revenue,true);cost=number(cost);return finite({profit:revenue-cost,margin:(revenue-cost)/revenue*100}); },
  dpi(width,height,printWidth,printHeight,unit) {
- width=number(width,true);height=number(height,true);printWidth=number(printWidth,true);printHeight=number(printHeight,true);
- if(!Number.isInteger(width)||!Number.isInteger(height)) throw new Error('Pixel dimensions must be whole numbers.');
- if(!['in','cm'].includes(unit)) throw new Error('Choose inches or centimeters.');
- const factor=unit==='cm'?2.54:1;
+ width=count(width,true);height=count(height,true);printWidth=number(printWidth,true);printHeight=number(printHeight,true);
+ choice(unit,['in','cm']);const factor=unit==='cm'?2.54:1;
  return finite({horizontal:width/printWidth*factor,vertical:height/printHeight*factor});
- }
+ },
+ cpc(spend,clicks) { return finite({cpc:number(spend)/count(clicks,true)}); },
+ cpm(spend,impressions) { return finite({cpm:number(spend)/count(impressions,true)*1000}); },
+ ctr(clicks,impressions) { return finite({ctr:count(clicks)/count(impressions,true)*100}); },
+ cpa(spend,acquisitions) { return finite({cpa:number(spend)/count(acquisitions,true)}); },
+ discount(price,percentage) { price=number(price);percentage=number(percentage);if(percentage>100)throw new Error('Discount must be between 0 and 100%.');const savings=price*(percentage/100);return finite({savings,salePrice:price-savings}); },
+ markup(cost,sellingPrice) { cost=number(cost,true);sellingPrice=number(sellingPrice);const profit=sellingPrice-cost;return finite({profit,markup:profit/cost*100}); },
+ breakEven(fixedCost,price,variableCost) { fixedCost=number(fixedCost);price=number(price,true);variableCost=number(variableCost);const contribution=price-variableCost;if(contribution<=0)throw new Error('Selling price must exceed variable cost; otherwise there is no finite break-even point.');const exactUnits=fixedCost/contribution;const units=breakEvenWhole(fixedCost,price,variableCost);if(!Number.isSafeInteger(units))throw new Error('Break-even unit count is too large.');return finite({contribution,exactUnits,units,revenue:units*price}); },
+ bleedTrim(width,height,bleed,unit) { width=number(width,true);height=number(height,true);bleed=number(bleed);choice(unit,['mm','cm','in']);return finite({width:width+2*bleed,height:height+2*bleed,trimWidth:width,trimHeight:height}); },
+ printSize(width,height,from,to,ppi) { choice(from,['mm','cm','in','px']);choice(to,['mm','cm','in','px']);width=number(width,true);height=number(height,true);ppi=number(ppi,true);if(from==='px'){width=count(width,true);height=count(height,true);}const source=from==='px'?1/ppi:inches[from];const target=to==='px'?ppi:1/inches[to];return finite({width:width*source*target,height:height*source*target}); },
+ videoSize(seconds,videoMbps,audioKbps) { seconds=number(seconds,true);videoMbps=number(videoMbps,true);audioKbps=number(audioKbps);const bitrateMbps=videoMbps+audioKbps/1000;const bytes=seconds*bitrateMbps*1000000/8;return finite({bitrateMbps,bytes,MB:bytes/1e6,MiB:bytes/1048576,GB:bytes/1e9}); },
+ videoBitrate(seconds,fileMB,audioKbps) { seconds=number(seconds,true);fileMB=number(fileMB,true);audioKbps=number(audioKbps);const totalMbps=fileMB*8/seconds;const videoMbps=totalMbps-audioKbps/1000;if(videoMbps<=0)throw new Error('File size is too small for the selected audio bitrate and duration.');return finite({totalMbps,videoMbps}); },
+ framesDuration(value,fps,mode) { fps=number(fps,true);choice(mode,['frames','duration']);if(mode==='frames'){const frames=count(value);return finite({frames,seconds:frames/fps});}const seconds=number(value);const frames=Math.round(seconds*fps);if(!Number.isSafeInteger(frames))throw new Error('Frame count is too large.');return finite({frames,seconds:frames/fps}); }
 };
 if(typeof module!=='undefined' && module.exports) module.exports=api;
 root.ToolPivioMath=api;
 })(typeof window!=='undefined'?window:globalThis);
-</script><script>(function(){
+</script><script>/* UI definitions: IDs are stable public embed identifiers. */
+(function(root){
+'use strict';
+const m=root.ToolPivioMath;
+const fmt=n=>new Intl.NumberFormat('en',{maximumFractionDigits:4}).format(n);
+const amount=n=>fmt(n)+' (in your input currency)';
+const field=(name,label,example,extra={})=>({name,label,example,...extra});
+const select=(name,label,options,extra={})=>({name,label,options,...extra});
+const spend=field('spend','Advertising spend','1000');
+const definitions={
+ roas:{fields:[field('revenue','Attributed revenue','5000'),spend],calculate:v=>{const r=m.roas(v.revenue,v.spend);return 'Return on ad spend: '+fmt(r.roas)+'×\nROAS percentage: '+fmt(r.percentage)+'%';}},
+ margin:{fields:[field('revenue','Revenue','100'),field('cost','Total cost','60')],calculate:v=>{const r=m.margin(v.revenue,v.cost);return 'Profit (in your input currency): '+fmt(r.profit)+'\nProfit margin: '+fmt(r.margin)+'%';}},
+ dpi:{fields:[field('width','Image width (pixels)','3000',{whole:true}),field('height','Image height (pixels)','2400',{whole:true}),field('printWidth','Print width','10'),field('printHeight','Print height','8'),select('unit','Print size unit',[['in','Inches'],['cm','Centimeters']])],calculate:v=>{const r=m.dpi(v.width,v.height,v.printWidth,v.printHeight,v.unit);return 'Horizontal resolution: '+fmt(r.horizontal)+' PPI\nVertical resolution: '+fmt(r.vertical)+' PPI';}},
+ cpc:{fields:[spend,field('clicks','Total clicks','500',{whole:true})],calculate:v=>'Cost per click: '+amount(m.cpc(v.spend,v.clicks).cpc)},
+ cpm:{fields:[spend,field('impressions','Total impressions','200000',{whole:true})],calculate:v=>'Cost per 1,000 impressions: '+amount(m.cpm(v.spend,v.impressions).cpm)},
+ ctr:{fields:[field('clicks','Total clicks','500',{whole:true}),field('impressions','Total impressions','20000',{whole:true})],calculate:v=>'Click-through rate: '+fmt(m.ctr(v.clicks,v.impressions).ctr)+'%'},
+ cpa:{fields:[spend,field('acquisitions','Total acquisitions / conversions','50',{whole:true})],calculate:v=>'Cost per acquisition: '+amount(m.cpa(v.spend,v.acquisitions).cpa)},
+ discount:{fields:[field('price','Original price','80'),field('percentage','Discount (%)','25',{max:100})],calculate:v=>{const r=m.discount(v.price,v.percentage);return 'Sale price: '+amount(r.salePrice)+'\nYou save: '+amount(r.savings);}},
+ markup:{fields:[field('cost','Unit cost','60'),field('sellingPrice','Unit selling price','100')],calculate:v=>{const r=m.markup(v.cost,v.sellingPrice);return 'Markup on cost: '+fmt(r.markup)+'%\nUnit profit: '+amount(r.profit);}},
+ 'break-even':{fields:[field('fixedCost','Fixed costs for the period','1000'),field('price','Selling price per unit','25'),field('variableCost','Variable cost per unit','15')],calculate:v=>{const r=m.breakEven(v.fixedCost,v.price,v.variableCost);return 'Whole units to break even: '+fmt(r.units)+'\nExact break-even units: '+fmt(r.exactUnits)+'\nContribution per unit: '+amount(r.contribution)+'\nRevenue at whole-unit break-even: '+amount(r.revenue);}},
+ 'bleed-trim':{fields:[field('width','Trim width','210'),field('height','Trim height','297'),field('bleed','Bleed on each edge','3'),select('unit','Size unit',[['mm','Millimeters'],['cm','Centimeters'],['in','Inches']])],calculate:v=>{const r=m.bleedTrim(v.width,v.height,v.bleed,v.unit);return 'Artwork with bleed: '+fmt(r.width)+' × '+fmt(r.height)+' '+v.unit+'\nFinal trim: '+fmt(r.trimWidth)+' × '+fmt(r.trimHeight)+' '+v.unit;}},
+ 'print-size':{fields:[field('width','Width','3000'),field('height','Height','2400'),select('from','Convert from',[['px','Pixels'],['mm','Millimeters'],['cm','Centimeters'],['in','Inches']]),select('to','Convert to',[['in','Inches'],['mm','Millimeters'],['cm','Centimeters'],['px','Pixels']]),field('ppi','Resolution (pixels per inch)','300')],calculate:v=>{const r=m.printSize(v.width,v.height,v.from,v.to,v.ppi);return 'Converted size: '+fmt(r.width)+' × '+fmt(r.height)+' '+v.to+(v.to==='px'?'\nNearest whole pixels: '+Math.round(r.width)+' × '+Math.round(r.height):'')+'\nResolution: '+fmt(Number(v.ppi))+' PPI';}},
+ 'video-size':{fields:[select('mode','Calculate',[['size','File size from bitrate'],['bitrate','Video bitrate from target size']]),field('seconds','Duration (seconds)','60'),field('videoMbps','Video bitrate (Mbps)','8',{when:['mode','size']}),field('fileMB','Target file size (MB, decimal)','60.96',{when:['mode','bitrate']}),field('audioKbps','Audio bitrate (kbps; 0 for silent)','128')],calculate:v=>{if(v.mode==='bitrate'){const r=m.videoBitrate(v.seconds,v.fileMB,v.audioKbps);return 'Video bitrate budget: '+fmt(r.videoMbps)+' Mbps\nCombined bitrate: '+fmt(r.totalMbps)+' Mbps';}if(v.mode!=='size')throw Error('Choose a supported calculation.');const r=m.videoSize(v.seconds,v.videoMbps,v.audioKbps);return 'Estimated file size: '+fmt(r.MB)+' MB\nBinary file size: '+fmt(r.MiB)+' MiB\nCombined bitrate: '+fmt(r.bitrateMbps)+' Mbps';}},
+ 'frames-duration':{fields:[select('mode','Convert',[['frames','Frames to duration'],['duration','Duration to frames']]),field('value','Total frames or seconds (according to mode)','300'),field('fps','Frame rate (frames per second)','30')],calculate:v=>{const r=m.framesDuration(v.value,v.fps,v.mode);return 'Frames: '+fmt(r.frames)+'\nDuration: '+fmt(r.seconds)+' seconds'+(v.mode==='duration'?'\nRounded to the nearest whole frame.':'');}}
+};
+root.ToolPivioDefinitions=definitions;
+if(typeof module!=='undefined'&&module.exports)module.exports=definitions;
+})(typeof window!=='undefined'?window:globalThis);
+
+/* ToolPivio file tools. User files stay in this browser. Original code; PDF support uses bundled MIT pdf-lib. */
+(function (root) {
+  'use strict';
+  const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+  const MAX_FILE = 20 * 1024 * 1024, MAX_TOTAL = 60 * 1024 * 1024, MAX_PIXELS = 32000000;
+  const FILE_IDS = ['image-resizer', 'image-compressor', 'image-converter', 'images-to-pdf', 'pdf-merge'];
+  let sequence = 0, pdfPromise;
+
+  function positive(value, label, max = 12000) {
+    const n = Number(value);
+    if (String(value).trim() === '' || !Number.isInteger(n) || n < 1 || n > max) throw Error(label + ' must be a whole number from 1 to ' + max + '.');
+    return n;
+  }
+  function dimensions(width, height) {
+    positive(width, 'Width'); positive(height, 'Height');
+    if (width * height > MAX_PIXELS) throw Error('Choose dimensions totaling at most 32 million pixels.');
+  }
+  function bytes(n) { return n < 1024 * 1024 ? (n / 1024).toFixed(1) + ' KB' : (n / 1024 / 1024).toFixed(2) + ' MB'; }
+  function checkFiles(files, type, multiple) {
+    if (!files.length) throw Error('Choose ' + (type === 'pdf' ? 'PDF files' : 'an image') + ' first.');
+    if (files.length > (multiple ? 10 : 1)) throw Error('Choose at most ' + (multiple ? 10 : 1) + ' files.');
+    if (files.reduce((sum, f) => sum + f.size, 0) > MAX_TOTAL) throw Error('Keep the combined input below 60 MB.');
+    files.forEach(file => {
+      if (file.size === 0 || file.size > MAX_FILE) throw Error('Each file must contain data and be no larger than 20 MB.');
+      if (type === 'pdf' ? file.type !== 'application/pdf' : !IMAGE_TYPES.includes(file.type)) throw Error(type === 'pdf' ? 'Choose PDF files only.' : 'Choose JPG, PNG, or WebP images only. Animated formats and SVG are not supported.');
+    });
+  }
+  async function readImage(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = new Image();
+      img.src = url;
+      try { await img.decode(); } catch (_) { throw Error('This image could not be decoded. Choose an undamaged JPG, PNG, or WebP file.'); }
+      dimensions(img.naturalWidth, img.naturalHeight);
+      return img;
+    } finally { URL.revokeObjectURL(url); }
+  }
+  function canvasFor(image, width, height, mime) {
+    dimensions(width, height);
+    const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+    const context = canvas.getContext('2d');
+    if (!context) throw Error('Your browser could not create an image canvas.');
+    if (mime === 'image/jpeg') { context.fillStyle = '#ffffff'; context.fillRect(0, 0, width, height); }
+    context.imageSmoothingEnabled = true; context.imageSmoothingQuality = 'high';
+    context.drawImage(image, 0, 0, width, height);
+    return canvas;
+  }
+  function encode(canvas, mime, quality) {
+    return new Promise((resolve, reject) => canvas.toBlob(blob => {
+      if (!blob) return reject(Error('The browser could not encode this image. Try smaller dimensions.'));
+      if (blob.type !== mime) return reject(Error('Your browser cannot encode this format. Choose JPG or PNG.'));
+      resolve(blob);
+    }, mime, quality));
+  }
+  function pdfLibrary() {
+    if (root.PDFLib) return Promise.resolve(root.PDFLib);
+    if (!pdfPromise) pdfPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = new URL(location.pathname.includes('/tools/') ? '../assets/pdf-lib.min.js' : 'assets/pdf-lib.min.js', location.href).href;
+      script.onload = () => root.PDFLib ? resolve(root.PDFLib) : reject(Error('PDF support could not load. Reload and try again.'));
+      script.onerror = () => { pdfPromise = null; script.remove(); reject(Error('PDF support could not load. Reload and try again.')); };
+      document.head.appendChild(script);
+    });
+    return pdfPromise;
+  }
+  const field = (prefix, name, label, markup) => '<div><label for="' + prefix + '-' + name + '">' + label + '</label>' + markup.replace(/@@ID@@/g, prefix + '-' + name) + '</div>';
+  function mount(host, id) {
+    if (!FILE_IDS.includes(id)) return false;
+    const pdf = id === 'pdf-merge' || id === 'images-to-pdf', merge = id === 'pdf-merge', resize = id === 'image-resizer';
+    const prefix = 'files-' + sequence++;
+    const form = document.createElement('form'); form.className = 'calculator file-tool'; form.noValidate = true;
+    let markup = field(prefix, 'file', merge ? 'PDF files (in merge order)' : pdf ? 'Images (one per PDF page, in selected order)' : 'Image file', '<input id="@@ID@@" name="file" type="file" accept="' + (merge ? 'application/pdf' : 'image/jpeg,image/png,image/webp') + '"' + (pdf ? ' multiple' : '') + ' required>');
+    if (!pdf) {
+      if (resize) markup += field(prefix, 'width', 'Output width (pixels)', '<input id="@@ID@@" name="width" type="number" min="1" max="12000" step="1" value="1024" required>') + field(prefix, 'height', 'Output height (pixels)', '<input id="@@ID@@" name="height" type="number" min="1" max="12000" step="1" value="768" required>') + field(prefix, 'ratio', 'Keep original proportions', '<select id="@@ID@@" name="ratio"><option value="yes">Yes — height follows width</option><option value="no">No — use both dimensions</option></select>');
+      markup += field(prefix, 'format', 'Output format', '<select id="@@ID@@" name="format">' + (id === 'image-compressor' ? '' : '<option value="image/png">PNG (lossless)</option>') + '<option value="image/jpeg"' + (id === 'image-compressor' ? ' selected' : '') + '>JPG (white background)</option><option value="image/webp">WebP</option></select>') + field(prefix, 'quality', 'JPG / WebP quality (1–100)', '<input id="@@ID@@" name="quality" type="number" min="1" max="100" step="1" value="80" required>');
+    } else if (!merge) {
+      markup += field(prefix, 'paper', 'PDF paper size', '<select id="@@ID@@" name="paper"><option value="a4">A4 (210 × 297 mm)</option><option value="letter">US Letter (8.5 × 11 inches)</option></select>') + field(prefix, 'orientation', 'Page orientation', '<select id="@@ID@@" name="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select>') + field(prefix, 'margin', 'Page margin (mm)', '<input id="@@ID@@" name="margin" type="number" min="0" max="50" step="1" value="10" required>') + field(prefix, 'quality', 'Embedded image quality (1–100)', '<input id="@@ID@@" name="quality" type="number" min="1" max="100" step="1" value="85" required>');
+    }
+    form.innerHTML = '<div class="fields">' + markup + '</div><p class="file-details" role="status">' + (pdf ? 'Up to 10 files; 20 MB per file, 60 MB total. Selection order is output order.' : 'JPG, PNG, or WebP; up to 20 MB and 32 million pixels. Your file stays on this device.') + '</p><p class="error" role="alert"></p><div class="actions"><button type="submit" class="primary">Process</button><button type="reset" class="secondary">Reset</button><button type="button" class="secondary sample-file">Use sample ' + (merge ? 'PDFs' : 'image') + '</button></div><div class="result" role="status" aria-live="polite" hidden></div><div class="file-preview" hidden><img alt="Processed image preview" style="max-width:100%;height:auto;display:block;margin:12px 0;border:1px solid #dae4e9"><a class="file-download" download>Download result</a></div><p class="file-limitations">' + (merge ? 'Merge up to 200 pages. Password-protected or damaged files are unsupported. Page content is copied; signatures, bookmarks, document-level forms and metadata are not preserved. Review the output before sharing.' : pdf ? 'Each image is fitted inside one page without cropping. Images are converted to JPG with a white background. The PDF contains pictures, not searchable text.' : 'PNG quality is lossless; quality applies only to JPG and WebP. JPG replaces transparency with white. Re-encoding removes most metadata; animation is not preserved. A smaller file is not guaranteed.') + '</p>';
+    form.querySelector('.actions').style.flexWrap = 'wrap';
+    form.querySelectorAll('.fields > div').forEach(element => { element.style.minWidth = '0'; });
+    form.style.overflowWrap = 'anywhere';
+    if (resize) form.elements.height.disabled = true;
+    const input = form.elements.file, error = form.querySelector('.error'), result = form.querySelector('.result'), preview = form.querySelector('.file-preview'), previewImage = preview.querySelector('img'), download = preview.querySelector('a'), processButton = form.querySelector('[type=submit]'), sample = form.querySelector('.sample-file');
+    let generation = 0, outputURL = '', originalWidth = 0, originalHeight = 0;
+    function clean() {
+      generation++; error.textContent = ''; result.textContent = ''; result.hidden = true; preview.hidden = true; previewImage.removeAttribute('src'); download.removeAttribute('href'); processButton.disabled = false; sample.disabled = false;
+      if (outputURL) URL.revokeObjectURL(outputURL); outputURL = '';
+    }
+    function output(blob, name, summary, showImage) {
+      outputURL = URL.createObjectURL(blob); download.href = outputURL; download.download = name; download.textContent = 'Download ' + name + ' (' + bytes(blob.size) + ')';
+      previewImage.hidden = !showImage; if (showImage) previewImage.src = outputURL;
+      result.textContent = summary; result.hidden = false; preview.hidden = false;
+    }
+    async function describeInput() {
+      clean(); originalWidth = 0; originalHeight = 0;
+      const version = generation, files = Array.from(input.files);
+      if (!files.length) return;
+      try {
+        checkFiles(files, merge ? 'pdf' : 'image', pdf);
+        if (!pdf) {
+          const image = await readImage(files[0]); if (version !== generation) return;
+          originalWidth = image.naturalWidth; originalHeight = image.naturalHeight;
+          form.querySelector('.file-details').textContent = files[0].name + ': ' + originalWidth + ' × ' + originalHeight + ' pixels, ' + bytes(files[0].size) + '.';
+          if (resize) { form.elements.width.value = originalWidth; form.elements.height.value = originalHeight; }
+        } else form.querySelector('.file-details').textContent = 'Output order: ' + files.map((f, i) => (i + 1) + '. ' + f.name).join(' → ');
+      } catch (e) { if (version === generation) error.textContent = e.message; }
+    }
+    input.addEventListener('change', describeInput);
+    form.addEventListener('input', event => {
+      if (event.target === input) return;
+      clean();
+      if (resize) form.elements.height.disabled = form.elements.ratio.value === 'yes';
+      if (resize && originalWidth && form.elements.ratio.value === 'yes' && (event.target.name === 'width' || event.target.name === 'ratio')) {
+        const w = Number(form.elements.width.value); if (w > 0) form.elements.height.value = Math.max(1, Math.round(w * originalHeight / originalWidth));
+      }
+    });
+    form.addEventListener('change', event => { if (event.target !== input) clean(); });
+    form.addEventListener('reset', () => { clean(); originalWidth = 0; originalHeight = 0; if (resize) form.elements.height.disabled = true; form.querySelector('.file-details').textContent = 'Choose new files or use the sample to begin.'; });
+    sample.addEventListener('click', async () => {
+      clean(); const version = generation; sample.disabled = true;
+      try {
+        const transfer = new DataTransfer();
+        if (merge) {
+          const lib = await pdfLibrary();
+          for (let i = 0; i < 2; i++) { const doc = await lib.PDFDocument.create(); const page = doc.addPage([300, 200]); page.drawText('ToolPivio sample page ' + (i + 1)); transfer.items.add(new File([await doc.save()], 'sample-' + (i + 1) + '.pdf', { type: 'application/pdf' })); }
+        } else {
+          const canvas = document.createElement('canvas'); canvas.width = 640; canvas.height = 480;
+          const c = canvas.getContext('2d'); const gradient = c.createLinearGradient(0, 0, 640, 480); gradient.addColorStop(0, '#12283e'); gradient.addColorStop(1, '#087f75'); c.fillStyle = gradient; c.fillRect(0, 0, 640, 480); c.fillStyle = '#ffffff'; c.font = 'bold 36px sans-serif'; c.fillText('ToolPivio', 40, 240);
+          transfer.items.add(new File([await encode(canvas, 'image/png', 1)], 'toolpivio-sample.png', { type: 'image/png' }));
+        }
+        if (version !== generation) return; input.files = transfer.files; await describeInput();
+      } catch (e) { if (version === generation) error.textContent = e.message; }
+      finally { if (version === generation || !input.files.length) sample.disabled = false; }
+    });
+    form.addEventListener('submit', async event => {
+      event.preventDefault(); clean(); const version = generation; processButton.disabled = true;
+      try {
+        const files = Array.from(input.files); checkFiles(files, merge ? 'pdf' : 'image', pdf);
+        if (pdf) {
+          const lib = await pdfLibrary(), doc = await lib.PDFDocument.create(); let pages = 0;
+          if (merge) {
+            for (const file of files) {
+              let source; try { source = await lib.PDFDocument.load(await file.arrayBuffer()); } catch (_) { throw Error('Cannot read ' + file.name + '. Password-protected and damaged PDFs are unsupported.'); }
+              pages += source.getPageCount(); if (pages > 200) throw Error('Merge at most 200 PDF pages at a time.');
+              const copied = await doc.copyPages(source, source.getPageIndices()); copied.forEach(page => doc.addPage(page));
+            }
+          } else {
+            const quality = positive(form.elements.quality.value, 'Quality', 100) / 100;
+            const margin = Number(form.elements.margin.value);
+            if (!Number.isInteger(margin) || margin < 0 || margin > 50 || form.elements.margin.value.trim() === '') throw Error('Margin must be a whole number from 0 to 50 mm.');
+            if (!['a4', 'letter'].includes(form.elements.paper.value) || !['portrait', 'landscape'].includes(form.elements.orientation.value)) throw Error('Choose a supported paper size and orientation.');
+            let size = form.elements.paper.value === 'letter' ? [612, 792] : [595.276, 841.89]; if (form.elements.orientation.value === 'landscape') size.reverse();
+            const inset = margin * 72 / 25.4;
+            for (const file of files) {
+              const image = await readImage(file), canvas = canvasFor(image, image.naturalWidth, image.naturalHeight, 'image/jpeg'), blob = await encode(canvas, 'image/jpeg', quality), embedded = await doc.embedJpg(await blob.arrayBuffer()), page = doc.addPage(size);
+              const scale = Math.min((size[0] - inset * 2) / embedded.width, (size[1] - inset * 2) / embedded.height), width = embedded.width * scale, height = embedded.height * scale;
+              page.drawImage(embedded, { x: (size[0] - width) / 2, y: (size[1] - height) / 2, width, height }); pages++; canvas.width = canvas.height = 0;
+            }
+          }
+          const saved = await doc.save(); if (version !== generation) return;
+          output(new Blob([saved], { type: 'application/pdf' }), merge ? 'toolpivio-merged.pdf' : 'toolpivio-images.pdf', pages + ' PDF page' + (pages === 1 ? '' : 's') + ' created from ' + files.length + ' file' + (files.length === 1 ? '' : 's') + '. Review the downloaded PDF before sharing.', false);
+        } else {
+          const mime = form.elements.format.value; if (!IMAGE_TYPES.includes(mime)) throw Error('Choose JPG, PNG, or WebP.');
+          const quality = positive(form.elements.quality.value, 'Quality', 100) / 100, image = await readImage(files[0]);
+          const width = resize ? positive(form.elements.width.value, 'Width') : image.naturalWidth;
+          const height = resize ? (form.elements.ratio.value === 'yes' ? Math.max(1, Math.round(width * image.naturalHeight / image.naturalWidth)) : positive(form.elements.height.value, 'Height')) : image.naturalHeight;
+          if (resize) form.elements.height.value = height;
+          const canvas = canvasFor(image, width, height, mime), blob = await encode(canvas, mime, quality); canvas.width = canvas.height = 0;
+          if (version !== generation) return;
+          const change = (1 - blob.size / files[0].size) * 100, name = 'toolpivio-' + (resize ? 'resized' : id === 'image-compressor' ? 'compressed' : 'converted') + '.' + ({ 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' })[mime];
+          output(blob, name, width + ' × ' + height + ' pixels. Input: ' + bytes(files[0].size) + '; output: ' + bytes(blob.size) + '. ' + Math.abs(change).toFixed(1) + '% ' + (change >= 0 ? 'smaller' : 'larger') + '.', true);
+        }
+      } catch (e) { if (version === generation) error.textContent = e.message || 'Processing failed. Try a smaller file.'; }
+      finally { if (version === generation) processButton.disabled = false; }
+    });
+    host.appendChild(form); return true;
+  }
+  root.ToolPivioFiles = { mount };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+(function(){
 'use strict';
 const search=document.getElementById('tool-search');
 let category='All tools';
-function filter(){let count=0;document.querySelectorAll('.card').forEach(card=>{const match=(category==='All tools'||card.dataset.categories.split('|').includes(category))&&card.textContent.toLowerCase().includes(search.value.trim().toLowerCase());card.hidden=!match;if(match)count++;});document.getElementById('search-status').textContent=count+' tools found';document.getElementById('no-tools').hidden=count!==0;}
+function filter(){let count=0;document.querySelectorAll('.card').forEach(card=>{const match=(category==='All tools'||card.dataset.categories.split('|').includes(category))&&card.textContent.toLowerCase().includes(search.value.trim().toLowerCase());card.hidden=!match;if(match)count++;});const status=document.getElementById('search-status'),empty=document.getElementById('no-tools');if(status)status.textContent=count+' tools found';if(empty)empty.hidden=count!==0;}
 if(search){search.addEventListener('input',filter);document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{category=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));filter();}));filter();}
-const definitions={roas:{fields:[['revenue','Attributed revenue','5000'],['spend','Advertising spend','1000']],calculate:v=>{const r=ToolPivioMath.roas(v.revenue,v.spend);return 'Return on ad spend: '+fmt(r.roas)+'×\nROAS percentage: '+fmt(r.percentage)+'%';}},margin:{fields:[['revenue','Revenue','100'],['cost','Total cost','60']],calculate:v=>{const r=ToolPivioMath.margin(v.revenue,v.cost);return 'Profit (in your input currency): '+fmt(r.profit)+'\nProfit margin: '+fmt(r.margin)+'%';}},dpi:{fields:[['width','Image width (pixels)','3000'],['height','Image height (pixels)','2400'],['printWidth','Print width','10'],['printHeight','Print height','8']],calculate:v=>{const r=ToolPivioMath.dpi(v.width,v.height,v.printWidth,v.printHeight,v.unit);return 'Horizontal resolution: '+fmt(r.horizontal)+' PPI\nVertical resolution: '+fmt(r.vertical)+' PPI';}}};
-function fmt(n){return new Intl.NumberFormat('en',{maximumFractionDigits:2}).format(n);}
+function fmt(n){return new Intl.NumberFormat('en',{maximumFractionDigits:4}).format(n);}
+// Preserve the three original tools in older hosts that do not load the new definitions asset.
+const oldDefinitions={roas:{fields:[['revenue','Attributed revenue','5000'],['spend','Advertising spend','1000']],calculate:v=>{const r=ToolPivioMath.roas(v.revenue,v.spend);return 'Return on ad spend: '+fmt(r.roas)+'×\nROAS percentage: '+fmt(r.percentage)+'%';}},margin:{fields:[['revenue','Revenue','100'],['cost','Total cost','60']],calculate:v=>{const r=ToolPivioMath.margin(v.revenue,v.cost);return 'Profit (in your input currency): '+fmt(r.profit)+'\nProfit margin: '+fmt(r.margin)+'%';}},dpi:{fields:[['width','Image width (pixels)','3000'],['height','Image height (pixels)','2400'],['printWidth','Print width','10'],['printHeight','Print height','8'],{name:'unit',label:'Print size unit',options:[['in','Inches'],['cm','Centimeters']]}],calculate:v=>{const r=ToolPivioMath.dpi(v.width,v.height,v.printWidth,v.printHeight,v.unit);return 'Horizontal resolution: '+fmt(r.horizontal)+' PPI\nVertical resolution: '+fmt(r.vertical)+' PPI';}}};
+const definitions=window.ToolPivioDefinitions||oldDefinitions;
 document.querySelectorAll('[data-tool]').forEach((host,index)=>{
-const definition=definitions[host.dataset.tool];if(!definition)return;
+const definition=definitions[host.dataset.tool];
+if(!definition){if(window.ToolPivioFiles&&window.ToolPivioFiles.mount(host,host.dataset.tool))return;host.textContent='This tool is unavailable. Please return to the tool catalog.';return;}
 const form=document.createElement('form');form.className='calculator';form.noValidate=true;
-form.innerHTML='<div class="fields">'+definition.fields.map(([name,label,example])=>'<div><label for="calc-'+index+'-'+name+'">'+label+'</label><input id="calc-'+index+'-'+name+'" name="'+name+'" type="number" inputmode="decimal" step="any" min="0" required placeholder="e.g. '+example+'" /></div>').join('')+(host.dataset.tool==='dpi'?'<div><label for="unit-'+index+'">Print size unit</label><select id="unit-'+index+'" name="unit"><option value="in">Inches</option><option value="cm">Centimeters</option></select></div>':'')+'</div><p class="error" role="alert"></p><div class="actions"><button class="primary" type="submit">Calculate</button><button class="secondary" type="reset">Reset</button></div><div class="result" role="status" aria-live="polite" hidden></div><p>Results rounded to two decimal places.</p>';
-const result=form.querySelector('.result'),error=form.querySelector('.error');
-form.addEventListener('submit',event=>{event.preventDefault();error.textContent='';result.hidden=true;try{result.textContent=definition.calculate(Object.fromEntries(new FormData(form)));result.hidden=false;}catch(e){error.textContent=e.message;}});
-form.addEventListener('input',()=>{result.hidden=true;error.textContent='';});
-form.addEventListener('reset',()=>{result.hidden=true;result.textContent='';error.textContent='';});host.appendChild(form);
+const grid=document.createElement('div');grid.className='fields';form.appendChild(grid);
+const controls=[];
+for(const raw of definition.fields){const f=Array.isArray(raw)?{name:raw[0],label:raw[1],example:raw[2]}:raw;const wrap=document.createElement('div');wrap.style.minWidth='0';const label=document.createElement('label');const id='calc-'+index+'-'+f.name;label.htmlFor=id;label.textContent=f.label;wrap.appendChild(label);const control=document.createElement(f.options?'select':'input');control.id=id;control.style.minWidth='0';control.name=f.name;control.required=true;if(f.options){for(const [value,text]of f.options){const option=document.createElement('option');option.value=value;option.textContent=text;control.appendChild(option);}}else{control.type='number';control.inputMode=f.whole?'numeric':'decimal';control.step=f.whole?'1':'any';control.min='0';if(f.max!==undefined)control.max=String(f.max);control.placeholder='e.g. '+f.example;}wrap.appendChild(control);grid.appendChild(wrap);controls.push({field:f,wrap,control});}
+const error=document.createElement('p');error.className='error';error.setAttribute('role','alert');form.appendChild(error);
+const actions=document.createElement('div');actions.className='actions';actions.style.flexWrap='wrap';
+for(const [type,text,cls]of[['submit','Calculate','primary'],['button','Use example','secondary'],['reset','Reset','secondary']]){const button=document.createElement('button');button.type=type;button.className=cls;button.textContent=text;if(type==='button')button.addEventListener('click',()=>{for(const {field,control}of controls)if(!field.options)control.value=field.example||'';clear();conditions();});actions.appendChild(button);}form.appendChild(actions);
+const result=document.createElement('div');result.className='result';result.setAttribute('role','status');result.setAttribute('aria-live','polite');result.style.whiteSpace='pre-line';result.style.overflowWrap='anywhere';result.hidden=true;form.appendChild(result);
+const note=document.createElement('p');note.className='small';note.textContent='Your values stay in this browser. Displayed results are rounded to at most four decimal places.';form.appendChild(note);
+function clear(){result.hidden=true;result.textContent='';error.textContent='';for(const {control}of controls)control.removeAttribute('aria-invalid');}
+function conditions(){for(const {field,wrap,control}of controls){const active=!field.when||form.elements[field.when[0]].value===field.when[1];wrap.hidden=!active;control.disabled=!active;control.required=active;}}
+form.addEventListener('submit',event=>{event.preventDefault();clear();try{result.textContent=definition.calculate(Object.fromEntries(new FormData(form)));result.hidden=false;}catch(e){error.textContent=e.message;const invalid=controls.find(({control})=>!control.disabled&&!control.validity.valid);if(invalid){invalid.control.setAttribute('aria-invalid','true');invalid.control.focus();}}});
+form.addEventListener('input',()=>{clear();conditions();});form.addEventListener('change',()=>{clear();conditions();});form.addEventListener('reset',()=>{clear();setTimeout(conditions,0);});host.appendChild(form);conditions();
 });
 })();
 </script><script>(function(){'use strict';if(parent===window)return;var parentOrigin='https://toolpivio.blogspot.com';function send(){var main=document.querySelector('main');if(!main)return;var height=Math.max(180,Math.ceil(main.getBoundingClientRect().height)+2);parent.postMessage({type:'ToolPivio:resize',height:height},parentOrigin);}window.addEventListener('message',function(event){if(event.source!==parent||!event.data||event.data.type!=='ToolPivio:requestResize'||!['https://toolpivio.blogspot.com',location.origin].includes(event.origin))return;parentOrigin=event.origin;send();});if(typeof ResizeObserver!=='undefined')new ResizeObserver(send).observe(document.querySelector('main'));window.addEventListener('load',send);window.addEventListener('resize',send);send();})();</script></body></html>

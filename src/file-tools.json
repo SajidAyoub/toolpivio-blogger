@@ -1,0 +1,57 @@
+[
+  {
+    "id": "image-resizer",
+    "slug": "image-resizer",
+    "title": "Image Resizer",
+    "category": "Image & PDF Tools",
+    "icon": "↔",
+    "description": "Resize JPG, PNG, and WebP images to exact pixel dimensions with an optional aspect-ratio lock.",
+    "formula": "With proportions locked, output height = output width × original height ÷ original width, rounded to the nearest pixel.",
+    "example": "A 640 × 480 image resized to 320 pixels wide becomes 320 × 240 pixels with proportions locked.",
+    "limitations": "Supports JPG, PNG, and WebP up to 20 MB and 32 million pixels. Maximum output dimension is 12,000 pixels. Enlarging an image does not create additional photographic detail. JPEG uses a white background."
+  },
+  {
+    "id": "image-compressor",
+    "slug": "image-compressor",
+    "title": "Image Compressor",
+    "category": "Image & PDF Tools",
+    "icon": "↓",
+    "description": "Re-encode an image as JPG or WebP with a quality setting, preview, and an honest before-and-after size comparison.",
+    "formula": "Size reduction (%) = (1 − output bytes ÷ input bytes) × 100. A negative reduction means the new file is larger.",
+    "example": "An image reduced from 1 MB to 400 KB saves about 60% using decimal byte units. Actual savings depend on image content, starting format, and quality.",
+    "limitations": "Quality is lossy for JPG and WebP; smaller output is not guaranteed. Dimensions are preserved. JPG replaces transparency with white. Maximum input is 20 MB and 32 million pixels."
+  },
+  {
+    "id": "image-converter",
+    "slug": "image-converter",
+    "title": "Image Format Converter",
+    "category": "Image & PDF Tools",
+    "icon": "⇄",
+    "description": "Convert between JPG, PNG, and WebP in your browser, then preview and download the converted image.",
+    "formula": "The image is decoded to a browser canvas and encoded in the selected output format at its original pixel dimensions.",
+    "example": "Convert a transparent PNG to JPG for a listing that requires JPEG; transparent pixels become white. Choose PNG or WebP when transparency is needed.",
+    "limitations": "PNG is lossless; quality settings apply to JPG and WebP only. Browser WebP encoding support is required. SVG, GIF, HEIC, RAW, and animation are unsupported. Re-encoding removes most metadata."
+  },
+  {
+    "id": "images-to-pdf",
+    "slug": "images-to-pdf",
+    "title": "Images to PDF",
+    "category": "Image & PDF Tools",
+    "icon": "▤",
+    "description": "Combine JPG, PNG, and WebP images into one downloadable PDF with one image per page.",
+    "formula": "Each image is scaled proportionally to fit the printable page area: scale = min(available width ÷ image width, available height ÷ image height).",
+    "example": "Select three product images, choose A4 portrait with 10 mm margins, and process them into a three-page PDF in the displayed input order.",
+    "limitations": "Up to 10 images, 20 MB each, 60 MB total, and 32 million pixels per image. Images are embedded as JPG on white; there is no OCR or searchable text. Selection order is output order. Uses bundled MIT-licensed pdf-lib 1.17.1."
+  },
+  {
+    "id": "pdf-merge",
+    "slug": "pdf-merge",
+    "title": "PDF Merger",
+    "category": "Image & PDF Tools",
+    "icon": "⊕",
+    "description": "Merge PDF pages locally into a single PDF, keeping the file order shown before processing.",
+    "formula": "Output pages are appended in selected file order, preserving each source file’s page order and page sizes.",
+    "example": "Select a two-page invoice followed by a one-page receipt to create a three-page PDF with the invoice first.",
+    "limitations": "Up to 10 PDFs, 20 MB each, 60 MB total, and 200 pages. Password-protected or damaged PDFs are unsupported. Digital signatures, bookmarks, document-level forms and metadata are not preserved. Review the result before sharing. Uses bundled MIT-licensed pdf-lib 1.17.1."
+  }
+]

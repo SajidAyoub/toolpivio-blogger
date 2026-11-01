@@ -6,10 +6,7 @@ import os
 from pathlib import Path
 from urllib.parse import urlparse
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
+from page_registry import expected_url, load_registry, read_page_files
 
 ROOT = Path(__file__).resolve().parent.parent
 SECRET_DIR = ROOT / "secrets"
@@ -17,18 +14,14 @@ CLIENT_FILE = SECRET_DIR / "oauth_client.json"
 TOKEN_FILE = SECRET_DIR / "token.json"
 SCOPES = ["https://www.googleapis.com/auth/blogger"]
 BLOG_URL = "https://toolpivio.blogspot.com/"
-PAGES = [
-    ("ROAS Calculator", "pages/roas.html", "/p/roas-calculator.html", "roas"),
-    ("Profit Margin Calculator", "pages/profit-margin.html", "/p/profit-margin-calculator.html", "margin"),
-    ("Print DPI Calculator", "pages/print-dpi.html", "/p/print-dpi-calculator.html", "dpi"),
-    ("About", "pages/about.html", "/p/about.html", None),
-    ("Contact", "pages/contact.html", "/p/contact.html", None),
-    ("Privacy Policy", "pages/privacy-policy.html", "/p/privacy-policy.html", None),
-    ("Terms", "pages/terms.html", "/p/terms.html", None),
-]
+PAGES = [(p["title"], p["file"], p["expected_path"], p.get("tool")) for p in load_registry()]
 
 
 def load_auth(interactive=False):
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from google_auth_oauthlib.flow import InstalledAppFlow
+
     raw = os.environ.get("BLOGGER_AUTH_JSON")
     if raw:
         credentials = Credentials.from_authorized_user_info(json.loads(raw), SCOPES)
@@ -56,22 +49,6 @@ def load_auth(interactive=False):
     return credentials
 
 
-def read_page_files():
-    pages = []
-    for title, filename, expected_path, marker in PAGES:
-        html = (ROOT / filename).read_text(encoding="utf-8").strip()
-        if not html:
-            raise SystemExit(f"Empty page: {filename}")
-        if marker:
-            old_marker = f'data-tool="{marker}"' in html
-            hosted_url = f'https://sajidayoub.github.io/toolpivio-blogger/embed.html?tool={marker}'
-            hosted_marker = '<iframe' in html and f'src="{hosted_url}"' in html
-            if not (old_marker or hosted_marker):
-                raise SystemExit(f"Missing calculator marker or hosted iframe in {filename}")
-        pages.append((title, html, expected_path, filename))
-    return pages
-
-
 def existing_pages(service, blog_id):
     pages = []
     for status in ("LIVE", "DRAFT"):
@@ -88,6 +65,42 @@ def existing_pages(service, blog_id):
     return pages
 
 
+def sync_pages(service, blog_id, new_pages, apply=False, replace_existing=False):
+    """Publish an already validated set. Theme and navigation are never modified."""
+    known = {}
+    for p in existing_pages(service, blog_id):
+        known.setdefault(p["title"].strip().casefold(), []).append(p)
+    plan = []
+    for title, html, expected_path, filename in new_pages:
+        found = known.get(title.casefold(), [])
+        if len(found) > 1:
+            raise SystemExit(f"Safety stop: duplicate existing pages named {title!r}")
+        if found and not expected_url(found[0].get("url", ""), expected_path):
+            raise SystemExit(f"Safety stop: existing page URL does not match registration for {filename}")
+        plan.append((title, html, expected_path, found[0] if found else None))
+    for title, html, expected_path, page in plan:
+        if page:
+            print(f"{'UPDATE' if replace_existing else 'SKIP EXISTING'}: {title}")
+            if apply and replace_existing:
+                result = service.pages().patch(
+                    blogId=blog_id, pageId=page["id"],
+                    body={"title": title, "content": html}
+                ).execute()
+                print("Updated URL:", result.get("url"))
+        else:
+            print(f"{'CREATE' if apply else 'WOULD CREATE'}: {title}")
+            if apply:
+                result = service.pages().insert(
+                    blogId=blog_id, isDraft=False,
+                    body={"title": title, "content": html}
+                ).execute()
+                print("Published URL:", result.get("url"))
+                if not expected_url(result.get("url", ""), expected_path):
+                    print("URL VERIFICATION REQUIRED: registration expected", expected_path)
+                    print("Keep hosted tool navigation until the returned Blogger URL is verified.")
+    if not apply:
+        print("PREVIEW ONLY: No live pages changed. Use --apply to publish.")
+
 def main():
     parser = argparse.ArgumentParser(description="Blogger API page publisher")
     parser.add_argument("command", choices=["auth", "sync"])
@@ -102,47 +115,19 @@ def main():
         load_auth(interactive=True)
         print("OAuth complete. Token saved locally (ignored by Git).")
         return
-    new_pages = read_page_files()
-    if args.only_file:
-        allowed = {item[1] for item in PAGES}
-        unknown = set(args.only_file) - allowed
-        if unknown:
-            raise SystemExit(f"Unrecognized page filename(s): {sorted(unknown)}")
-        new_pages = [page for page in new_pages if page[3] in set(args.only_file)]
+    try:
+        new_pages = read_page_files(args.only_file)
+    except (ValueError, OSError) as error:
+        raise SystemExit(str(error)) from None
+    from googleapiclient.discovery import build
     service = build("blogger", "v3", credentials=load_auth(), cache_discovery=False)
     blog = service.blogs().getByUrl(url=args.blog_url).execute()
     if urlparse(args.blog_url).hostname != urlparse(blog.get("url", "")).hostname:
         raise SystemExit("Safety stop: Google returned a different blog hostname")
     blog_id = blog["id"]
     print(f"Target blog: {blog.get('name')} — {blog.get('url')}")
-    known = {}
-    for p in existing_pages(service, blog_id):
-        known.setdefault(p["title"].strip().casefold(), []).append(p)
-    for title, html, expected_path, filename in new_pages:
-        found = known.get(title.casefold(), [])
-        if len(found) > 1:
-            raise SystemExit(f"Safety stop: duplicate existing pages named {title!r}")
-        if found:
-            page = found[0]
-            print(f"{'UPDATE' if args.replace_existing else 'SKIP EXISTING'}: {title}")
-            if args.apply and args.replace_existing:
-                result = service.pages().patch(
-                    blogId=blog_id, pageId=page["id"],
-                    body={"title": title, "content": html}
-                ).execute()
-                print("Updated URL:", result.get("url"))
-        else:
-            print(f"{'CREATE' if args.apply else 'WOULD CREATE'}: {title}")
-            if args.apply:
-                result = service.pages().insert(
-                    blogId=blog_id, isDraft=False,
-                    body={"title": title, "content": html}
-                ).execute()
-                print("Published URL:", result.get("url"))
-                if urlparse(result.get("url", "")).path != expected_path:
-                    print("WARNING: Different URL from theme link:", expected_path)
-    if not args.apply:
-        print("PREVIEW ONLY: No live pages changed. Use --apply to publish.")
+    sync_pages(service, blog_id, new_pages, args.apply, args.replace_existing)
+
 
 
 if __name__ == "__main__":
