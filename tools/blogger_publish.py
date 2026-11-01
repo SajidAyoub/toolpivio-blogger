@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import time
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -65,7 +66,23 @@ def existing_pages(service, blog_id):
     return pages
 
 
-def sync_pages(service, blog_id, new_pages, apply=False, replace_existing=False):
+def execute_with_rate_limit_retry(request, max_attempts=5):
+    """Retry transient Blogger quota throttling without retrying other HTTP failures."""
+    for attempt in range(max_attempts):
+        try:
+            return request.execute()
+        except Exception as error:
+            status = getattr(getattr(error, "resp", None), "status", None)
+            if status != 429 or attempt == max_attempts - 1:
+                raise
+            seconds = min(30 * (2 ** attempt), 120)
+            print(f"Google Blogger 429 rate limit: pausing {seconds}s before retry "
+                  f"{attempt + 2}/{max_attempts}", flush=True)
+            time.sleep(seconds)
+
+
+def sync_pages(service, blog_id, new_pages, apply=False, replace_existing=False,
+               write_interval_seconds=0):
     """Publish an already validated set. Theme and navigation are never modified."""
     known = {}
     for p in existing_pages(service, blog_id):
@@ -78,22 +95,29 @@ def sync_pages(service, blog_id, new_pages, apply=False, replace_existing=False)
         if found and not expected_url(found[0].get("url", ""), expected_path):
             raise SystemExit(f"Safety stop: existing page URL does not match registration for {filename}")
         plan.append((title, html, expected_path, found[0] if found else None))
+    last_write_time = None
     for title, html, expected_path, page in plan:
         if page:
             print(f"{'UPDATE' if replace_existing else 'SKIP EXISTING'}: {title}")
             if apply and replace_existing:
-                result = service.pages().patch(
+                if last_write_time is not None and write_interval_seconds:
+                    time.sleep(max(0, write_interval_seconds - (time.monotonic() - last_write_time)))
+                result = execute_with_rate_limit_retry(service.pages().patch(
                     blogId=blog_id, pageId=page["id"],
                     body={"title": title, "content": html}
-                ).execute()
+                ))
+                last_write_time = time.monotonic()
                 print("Updated URL:", result.get("url"))
         else:
             print(f"{'CREATE' if apply else 'WOULD CREATE'}: {title}")
             if apply:
-                result = service.pages().insert(
+                if last_write_time is not None and write_interval_seconds:
+                    time.sleep(max(0, write_interval_seconds - (time.monotonic() - last_write_time)))
+                result = execute_with_rate_limit_retry(service.pages().insert(
                     blogId=blog_id, isDraft=False,
                     body={"title": title, "content": html}
-                ).execute()
+                ))
+                last_write_time = time.monotonic()
                 print("Published URL:", result.get("url"))
                 if not expected_url(result.get("url", ""), expected_path):
                     print("URL VERIFICATION REQUIRED: registration expected", expected_path)
@@ -126,7 +150,9 @@ def main():
         raise SystemExit("Safety stop: Google returned a different blog hostname")
     blog_id = blog["id"]
     print(f"Target blog: {blog.get('name')} — {blog.get('url')}")
-    sync_pages(service, blog_id, new_pages, args.apply, args.replace_existing)
+    # Spread Blogger writes across time to avoid quota bursts. No delay for preview.
+    sync_pages(service, blog_id, new_pages, args.apply, args.replace_existing,
+               write_interval_seconds=15 if args.apply else 0)
 
 
 
