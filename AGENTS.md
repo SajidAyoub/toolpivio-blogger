@@ -1,48 +1,31 @@
-# ToolPivio — instructions for Codex (including mobile cloud tasks)
+# ToolPivio — Codex Project Rules
 
-You are working on ToolPivio, a Blogger-hosted free-tools site.
+**Read `docs/CODEX_SITE_MASTER_PLAN.md` before making design, tool, content, SEO, or publishing changes.**
 
-## Repository and live deployment
-- GitHub: SajidAyoub/toolpivio-blogger, default branch main.
+## Production state, verified 2026-11-01
 - Live blog: https://toolpivio.blogspot.com/
-- The Blogger API OAuth client, credentials and token are **not** in the repo. Never request them in chat, log them, commit them or upload them to a PR.
-- A GitHub Actions workflow in .github/workflows/blogger-pages.yml automatically updates *changed, recognized* pages/*.html files after a change is merged/pushed to main and its validation passes.
-- Existing pages: roas.html, profit-margin.html, print-dpi.html, about.html, contact.html, privacy-policy.html, terms.html. The publisher has an explicit registry in tools/blogger_publish.py. Adding a new file is **not** sufficient to deploy a new Page.
-- Theme XML is generated from scripts/build.py and src/* into dist/toolpivio.xml. **Theme XML is not deployed via the Blogger API**. Theme changes need an explicit, separate Blogger HTML-editor upload.
+- GitHub repo: SajidAyoub/toolpivio-blogger, branch `main`.
+- The owner tested three Blogger-embedded calculators (ROAS, Profit Margin, Print DPI) and each Calculate/Reset works correctly.
+- OAuth credentials are held privately in GitHub Actions secret `BLOGGER_AUTH_JSON`. Never print, request in chat, commit, copy to PR, or change these credentials.
+- The working Blogger design is the **root** `ToolPivio_Restored_Design_v2.xml` (Contempo-based, ~151 KB). It renders Blogger About and calculator pages. **Do NOT upload `dist/toolpivio.xml`**, the broken old generator output. Preserve the native Blogger `Blog1` widget structure. PR #3 for the old theme is closed and superseded.
 
-## Standard workflow when the owner sends a command from mobile
-1. Prefer Codex **Cloud** with this repository and base branch main; cloud tasks do not require the user's PC.
-2. Read relevant source files and identify whether the request is PAGE CONTENT or THEME/TOOL CODE.
-3. Make only changes necessary to the requested task. Never modify secrets, GitHub Actions authorization, or Blogger credentials.
-4. For a page-only content update, modify an existing pages/*.html file, keep its calculator data-tool marker intact, and preserve the intended page title.
-5. For theme/UI/calculator JavaScript changes, modify sources; run npm run build and npm test so generated dist output stays in sync. Clearly state that resulting theme change is **not live** until uploaded to Blogger.
-6. Run the appropriate checks. Create a Pull Request targeting main. The owner reviews and merges it from phone; never auto-merge without being instructed.
-7. Report PR URL and whether merging will trigger the Blogger Pages auto-publisher:
-   - Changed recognized pages/*.html: Yes, after validation.
-   - Only theme, scripts, styling, images, or docs: No.
-   - New pages or tools: require registry, theme/navigation, and likely manual theme upload; do not claim fully automatic deployment.
-8. If a change can break the site, note risk and preserve rollback instructions.
+## Architecture and deployment — do not conflate
+1. **Calculator logic:** `src/calculators.js`, `src/app.js`, `src/styles.css`, `src/embed_template.html`. Run `python scripts/build_embed.py` to regenerate `docs/embed.html`. GitHub Pages hosts `main:/docs` at https://sajidayoub.github.io/toolpivio-blogger/.
+2. **Existing Blogger pages:** `pages/*.html` deployed via `tools/blogger_publish.py` and `.github/workflows/blogger-pages.yml`. Merging approved updates to registered page files triggers a selective Blogger Pages sync. New pages require edits to BOTH the publisher registry and workflow allowlist, plus checking the real resulting Blogger URL before navigation links are added.
+3. **Blogger theme:** `ToolPivio_Restored_Design_v2.xml` is the ONLY trusted source of current live theme. An improved XML file is produced for the owner to upload manually using Blogger Theme → Backup → Restore/Upload. Blogger API does NOT automatically install XML themes. Never change live Theme directly through GitHub and never describe theme changes as already live.
+4. **SEO:** Codex can prepare content/meta/schema and audits, but Search Console verification, indexing requests, and other account settings may require owner actions; no ranking guarantees.
+5. **Images:** Create original SVG/CSS hero artwork and icons in code; user-supplied/licensed raster assets may be added and optimized. Do not claim Codex can synthesize high-end product photos from code alone.
 
-## Known issue as of October 24, 2026
-- Blogger API publishing was verified by the user's CMD and GitHub Actions was green after PR #2, but live About page screenshot showed a blank page body beneath the header.
-- PR #3 (fix/blogger-blog1-page-rendering) is a proposed theme fix, not yet proven live. Do not assume content rendering is repaired. Leave this theme deployment/testing for the user's next desktop session unless specifically requested.
-- No need to repeat OAuth setup unless the token expires or GitHub Actions starts failing.
+## Development process
+- Use `main` as base. Create a focused feature branch and PR; NEVER auto-merge without owner's explicit instruction.
+- Preserve working calculator result logic and reset functionality. ROAS: 5000/1000 => 5×/500%; margin: (100-60)/100 => 40%; Print PPI: 3000×2400 at 10×8 inches => 300 both axes.
+- Current UI issues: duplicated headings inside the calculator iframe and DPI nested scrollbar. Fix without deleting SEO content, changing live URLs, or disabling calculators.
+- Prefer progressive, working features to fake placeholders. Validate XML, HTML, JS and responsive behavior, keyboard use, and formulas. When changing calculator runtime, regenerate `docs/embed.html`.
+- For each PR report: changed files, tests, screenshots or visual diffs where available, deployment path, and manual owner steps. Highlight any known limitations.
+- Never include tokens, private data, invented testimonials/ratings or scraped images without rights. Use no paid API by default.
 
-## November 1, 2026: standalone hosted calculators (preferred)
-- Functional calculator embed source is built by `python scripts/build_embed.py` from `src/embed_template.html`, `src/styles.css`, `src/app.js`, `src/calculators.js`. It generates `docs/embed.html`.
-- GitHub Pages should be configured **once** under Settings → Pages → Deploy from branch: `main` and folder `/docs`. Until enabled and verified, the hosted embed URL is not confirmed live.
-- Hosted calculator URL: `https://sajidayoub.github.io/toolpivio-blogger/embed.html?tool=roas` (or `margin`, `dpi`).
-- PR #4 replaces the three existing Blogger page calculator placeholder divs with accessible iframe embeds. **Do not merge until GitHub Pages is enabled and the embed URL works.** After merge, Blogger Pages GitHub Action deploys the three pages automatically.
-- For *future calculator changes*, edit source files and regenerate `docs/embed.html`; GitHub Pages publishes updated `docs` assets upon approved merge. Updates to known Blogger page text still auto-deploy via Blogger API. For a **new tool** you must update registry, Blogger page, navigation links, and embed generator; do not assume new page discovery automatically.
-- Live Blogger theme is a working Contempo-based ToolPivio V2 applied manually; the repository's old theme generator `scripts/build.py` and `dist/toolpivio.xml` are **not** that live theme. Do not upload old dist XML or call it the current live template. Preserve the working Blogger appearance until source is synced.
+## Priorities
+Follow `docs/CODEX_SITE_MASTER_PLAN.md`: (A) preserve working theme and design premium V3, original banner graphics, extensible catalog and UI fixes; (B) functioning tools in marketing/e-commerce/print/video/image/PDF categories; (C) user-focused SEO; (D) controlled production deployment.
 
-
-## VERIFIED LIVE STATUS — 2026-11-01 (supersedes earlier pending warnings)
-- User confirmed in live Blogger screenshots that all THREE calculators work: ROAS 5000/1000 = 5× (500%), Profit Margin 100/60 = 40 (40%), and Print DPI 3000×2400 at 10×8 inches = 300 PPI. User also tested Reset for all three.
-- The GitHub Pages calculator host at `https://sajidayoub.github.io/toolpivio-blogger/embed.html?tool=roas` is LIVE; `margin` and `dpi` variants are embedded into Blogger Pages. PR #4 has MERGED. Blogger GitHub Actions run #6 succeeded and updated all three Blogger pages.
-- Google OAuth project was switched to IN PRODUCTION, a new OAuth token was generated locally and the encrypted GitHub Actions secret `BLOGGER_AUTH_JSON` was renewed; do not handle or reveal secrets.
-- The currently LIVE Blogger theme is **ToolPivio_Restored_Design_v2.xml**, a working Contempo-based design. The repo's generated `dist/toolpivio.xml` is an outdated, problematic custom theme and MUST NOT be applied to Blogger or treated as the live theme. The earlier page-body blank issue was resolved using the current Contempo-based theme; avoid resurrecting PR #3.
-- CURRENT quirks: some Blogger calculator pages repeat the headline inside the iframe; the DPI iframe has an internal scrollbar. These are UI polish items only. Preserve functionality during any cleanup.
-- Working content pipeline: edit an existing `pages/*.html` -> PR -> merge to `main` -> GitHub Actions validates and updates only changed Blogger Pages. Calculator code pipeline: edit `src/calculators.js`, `src/app.js`, `src/styles.css` and/or `src/embed_template.html`; run `python scripts/build_embed.py` to regenerate `docs/embed.html`; commit both source and generated file; PR -> merge -> GitHub Pages serves new calculator code. GitHub Actions validates generated asset. No theme upload needed for these kinds of changes.
-- For NEW calculators, implement the calculator host, update registry `tools/blogger_publish.py`, and create the Blogger page, but do NOT claim Blogger navigation/homepage cards update automatically: those are still in the live theme, whose sources have not yet been synchronized into GitHub.
-- Recommended Codex method: choose this repo, base `main`, read AGENTS.md, make a single bounded task with tests, then create a PR without self-merging. Owner reviews/merges; website updates via relevant pipeline. Cloud Codex can work without owner's PC.
+## Mobile/Cloud tasks
+Codex Cloud environment should use this repo; Cloud tasks do not need owner's Windows machine running. Instructions: `docs/MOBILE_CODEX_WORKFLOW.md`. Continue in one task for iterative changes; commit finished work. Owner approves GitHub PRs before any merge.
