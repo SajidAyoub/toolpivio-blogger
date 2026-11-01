@@ -1,0 +1,163 @@
+[
+  {
+    "title": "ROAS Calculator",
+    "file": "pages/roas.html",
+    "expected_path": "/p/roas-calculator.html",
+    "tool": "roas",
+    "url_verified": true
+  },
+  {
+    "title": "Profit Margin Calculator",
+    "file": "pages/profit-margin.html",
+    "expected_path": "/p/profit-margin-calculator.html",
+    "tool": "margin",
+    "url_verified": true
+  },
+  {
+    "title": "Print DPI Calculator",
+    "file": "pages/print-dpi.html",
+    "expected_path": "/p/print-dpi-calculator.html",
+    "tool": "dpi",
+    "url_verified": true
+  },
+  {
+    "title": "About",
+    "file": "pages/about.html",
+    "expected_path": "/p/about.html",
+    "tool": null,
+    "url_verified": true
+  },
+  {
+    "title": "Contact",
+    "file": "pages/contact.html",
+    "expected_path": "/p/contact.html",
+    "tool": null,
+    "url_verified": true
+  },
+  {
+    "title": "Privacy Policy",
+    "file": "pages/privacy-policy.html",
+    "expected_path": "/p/privacy-policy.html",
+    "tool": null,
+    "url_verified": true
+  },
+  {
+    "title": "Terms",
+    "file": "pages/terms.html",
+    "expected_path": "/p/terms.html",
+    "tool": null,
+    "url_verified": true
+  },
+  {
+    "title": "CPC Calculator",
+    "file": "pages/cpc.html",
+    "expected_path": "/p/cpc-calculator.html",
+    "tool": "cpc",
+    "url_verified": false
+  },
+  {
+    "title": "CPM Calculator",
+    "file": "pages/cpm.html",
+    "expected_path": "/p/cpm-calculator.html",
+    "tool": "cpm",
+    "url_verified": false
+  },
+  {
+    "title": "CTR Calculator",
+    "file": "pages/ctr.html",
+    "expected_path": "/p/ctr-calculator.html",
+    "tool": "ctr",
+    "url_verified": false
+  },
+  {
+    "title": "CPA Calculator",
+    "file": "pages/cpa.html",
+    "expected_path": "/p/cpa-calculator.html",
+    "tool": "cpa",
+    "url_verified": false
+  },
+  {
+    "title": "Discount Calculator",
+    "file": "pages/discount.html",
+    "expected_path": "/p/discount-calculator.html",
+    "tool": "discount",
+    "url_verified": false
+  },
+  {
+    "title": "Markup Calculator",
+    "file": "pages/markup.html",
+    "expected_path": "/p/markup-calculator.html",
+    "tool": "markup",
+    "url_verified": false
+  },
+  {
+    "title": "Break-even Calculator",
+    "file": "pages/break-even.html",
+    "expected_path": "/p/break-even-calculator.html",
+    "tool": "break-even",
+    "url_verified": false
+  },
+  {
+    "title": "Bleed & Trim Calculator",
+    "file": "pages/bleed-trim.html",
+    "expected_path": "/p/bleed-trim-calculator.html",
+    "tool": "bleed-trim",
+    "url_verified": false
+  },
+  {
+    "title": "Print Size Converter",
+    "file": "pages/print-size.html",
+    "expected_path": "/p/print-size-converter.html",
+    "tool": "print-size",
+    "url_verified": false
+  },
+  {
+    "title": "Video File Size & Bitrate Calculator",
+    "file": "pages/video-size.html",
+    "expected_path": "/p/video-file-size-bitrate-calculator.html",
+    "tool": "video-size",
+    "url_verified": false
+  },
+  {
+    "title": "Frames & Duration Converter",
+    "file": "pages/frames-duration.html",
+    "expected_path": "/p/frames-duration-converter.html",
+    "tool": "frames-duration",
+    "url_verified": false
+  },
+  {
+    "title": "Image Resizer",
+    "file": "pages/image-resizer.html",
+    "expected_path": "/p/image-resizer.html",
+    "tool": "image-resizer",
+    "url_verified": false
+  },
+  {
+    "title": "Image Compressor",
+    "file": "pages/image-compressor.html",
+    "expected_path": "/p/image-compressor.html",
+    "tool": "image-compressor",
+    "url_verified": false
+  },
+  {
+    "title": "Image Format Converter",
+    "file": "pages/image-converter.html",
+    "expected_path": "/p/image-format-converter.html",
+    "tool": "image-converter",
+    "url_verified": false
+  },
+  {
+    "title": "Images to PDF",
+    "file": "pages/images-to-pdf.html",
+    "expected_path": "/p/images-to-pdf.html",
+    "tool": "images-to-pdf",
+    "url_verified": false
+  },
+  {
+    "title": "PDF Merger",
+    "file": "pages/pdf-merge.html",
+    "expected_path": "/p/pdf-merger.html",
+    "tool": "pdf-merge",
+    "url_verified": false
+  }
+]

@@ -1,0 +1,280 @@
+{
+  "roas": {
+    "description": "Calculate return on ad spend from attributed revenue and campaign cost. See ROAS as a multiple and percentage, with a worked example and limitations.",
+    "intro": "Compare the revenue attributed to a campaign with the amount spent on its advertising. Match the date range, attribution model and currency before entering your figures.",
+    "formula": "ROAS = attributed revenue ÷ advertising spend. ROAS percentage = ROAS × 100.",
+    "example": "A campaign generates 5,000 in attributed revenue from 1,000 in ad spend. Its ROAS is 5,000 ÷ 1,000 = 5×, equivalent to 500%.",
+    "limitations": "ROAS is a revenue measure. It excludes product costs, refunds, agency fees, platform fees and overhead unless those are included in your source figures. A high ROAS does not establish that a campaign is profitable.",
+    "steps": [
+      "Enter campaign revenue attributed using one consistent attribution model.",
+      "Enter advertising spend for the same campaign and reporting period; spend must be greater than zero.",
+      "Calculate to see the revenue multiple and percentage. Reset clears the form for another campaign."
+    ],
+    "faq": [
+      {
+        "question": "Is 5× ROAS the same as a 500% profit?",
+        "answer": "No. 5× ROAS means five units of revenue for each unit of advertising spend. Calculate profit after all relevant costs separately with the profit margin calculator."
+      }
+    ]
+  },
+  "margin": {
+    "description": "Calculate profit and profit margin from revenue and total cost. Understand negative margins and the difference between margin and markup.",
+    "intro": "Find the profit remaining after your chosen costs, then express it as a share of revenue. Use a single product, order or reporting period consistently.",
+    "formula": "Profit = revenue − total cost. Profit margin (%) = (revenue − total cost) ÷ revenue × 100.",
+    "example": "Revenue of 100 and total cost of 60 produce a profit of 40. Profit margin is 40 ÷ 100 × 100 = 40%.",
+    "limitations": "The result reflects only the costs you enter. Include shipping, returns, advertising and platform fees when relevant. Revenue must be greater than zero; costs above revenue correctly produce a negative margin. This is a planning calculation, not tax or accounting advice.",
+    "steps": [
+      "Enter revenue in your chosen currency for one product, order or reporting period.",
+      "Enter all costs relevant to that same scope.",
+      "Calculate to see profit and margin. Reset clears the inputs and result."
+    ],
+    "faq": [
+      {
+        "question": "How is profit margin different from markup?",
+        "answer": "Margin divides profit by revenue; markup divides profit by cost. A product that costs 60 and sells for 100 has a 40% margin and about 66.67% markup."
+      }
+    ]
+  },
+  "dpi": {
+    "description": "Check image pixels per inch at a chosen print size in inches or centimeters. Calculate both axes and understand PPI, DPI and aspect-ratio limits.",
+    "intro": "Check the horizontal and vertical resolution of an image at its intended physical print size. This measures pixels per inch (PPI), often informally called print DPI.",
+    "formula": "Horizontal PPI = image width in pixels ÷ print width in inches. Vertical PPI = image height in pixels ÷ print height in inches. Inches = centimeters ÷ 2.54.",
+    "example": "An image measuring 3,000 × 2,400 pixels printed at 10 × 8 inches gives 300 PPI on both axes. The same print size is 25.4 × 20.32 centimeters.",
+    "limitations": "Pixel dimensions must be positive whole numbers. PPI describes image sampling, while printer DPI describes ink dots. Around 300 PPI is a common starting point for close-viewed prints, not a universal requirement. Different results on the two axes can indicate a shape mismatch; ask your printer about cropping, stretching, viewing distance and bleed.",
+    "steps": [
+      "Enter the image width and height in pixels from the file properties.",
+      "Enter the intended print dimensions and choose inches or centimeters.",
+      "Calculate to check both axes. Reset clears your measurements."
+    ],
+    "faq": [
+      {
+        "question": "Does changing a file's DPI metadata create detail?",
+        "answer": "No. Changing a resolution label does not add image detail. The available pixels and final physical dimensions determine PPI. Upscaling may add pixels, but it cannot recover original detail that was never captured."
+      }
+    ]
+  },
+  "cpc": {
+    "description": "Calculate average cost per click from ad spend and clicks. Compare campaign traffic costs using matching periods and consistent attribution.",
+    "steps": [
+      "Enter advertising spend in one currency.",
+      "Enter the positive whole-number count of clicks for the same campaign and period.",
+      "Calculate the average cost per click, then compare it with the value of your traffic."
+    ],
+    "faq": [
+      {
+        "question": "Does a lower CPC always mean a better campaign?",
+        "answer": "No. Lower traffic cost can still produce fewer qualified leads or sales. Review conversion rate, CPA and ROAS alongside CPC."
+      }
+    ]
+  },
+  "cpm": {
+    "description": "Calculate advertising cost per thousand impressions from spend and served impressions. See the CPM formula and a worked campaign example.",
+    "steps": [
+      "Enter advertising spend in your chosen currency.",
+      "Enter the positive whole-number count of impressions for the same reporting period.",
+      "Calculate the cost of one thousand impressions; impressions count ad displays, not unique people."
+    ],
+    "faq": [
+      {
+        "question": "Are impressions the same as reach?",
+        "answer": "No. One person may see an ad several times. CPM uses impressions, while reach estimates distinct people or accounts."
+      }
+    ]
+  },
+  "ctr": {
+    "description": "Calculate click-through rate as clicks divided by impressions. Check engagement using consistent campaign and reporting-period counts.",
+    "steps": [
+      "Enter the clicks recorded by your chosen advertising or analytics platform.",
+      "Enter impressions measured using the same campaign and reporting window.",
+      "Calculate the percentage of impressions that resulted in clicks."
+    ],
+    "faq": [
+      {
+        "question": "Can I compare CTR across every advertising channel?",
+        "answer": "Use caution. Placements, audience intent and click definitions differ. Compare similar campaigns and confirm the platform's reporting definitions."
+      }
+    ]
+  },
+  "cpa": {
+    "description": "Calculate average cost per acquisition or action from campaign spend and conversions. Keep conversion definitions and reporting periods consistent.",
+    "steps": [
+      "Choose the conversion you want to measure, such as a purchase or qualified lead.",
+      "Enter campaign spend and the number of those conversions for the same reporting window.",
+      "Calculate the average cost of each recorded acquisition or action."
+    ],
+    "faq": [
+      {
+        "question": "Is CPA the same as customer acquisition cost?",
+        "answer": "Not necessarily. CPA often measures one advertising action. Customer acquisition cost may include sales salaries, software and other acquisition costs in addition to advertising."
+      }
+    ]
+  },
+  "discount": {
+    "description": "Calculate a sale price and savings from an original price and percentage discount. Check the price before tax, shipping or other extra charges.",
+    "steps": [
+      "Enter the original price in a single currency.",
+      "Enter the percentage discount from zero to one hundred.",
+      "Calculate to see the discounted price and the amount saved."
+    ],
+    "faq": [
+      {
+        "question": "Can I add two percentage discounts together?",
+        "answer": "Successive discounts usually apply to the reduced price. A 20% discount followed by 10% gives a 28% total reduction, not 30%. Calculate each stage separately."
+      }
+    ]
+  },
+  "markup": {
+    "description": "Calculate markup percentage and profit from unit cost and selling price. Compare markup on cost with profit margin on revenue.",
+    "steps": [
+      "Enter the cost of the item or service, using the same cost basis throughout.",
+      "Enter the selling price in the same currency.",
+      "Calculate profit and the percentage markup on cost. Selling below cost produces a negative markup."
+    ],
+    "faq": [
+      {
+        "question": "Why does a 50% markup give less than a 50% margin?",
+        "answer": "Markup is calculated on cost; margin is calculated on selling price. A cost of 100 marked up by 50% sells for 150, so the margin is 50 ÷ 150 = 33.33%."
+      }
+    ]
+  },
+  "break-even": {
+    "description": "Estimate break-even sales units from fixed costs, selling price and variable unit cost. See the contribution-margin formula and whole-unit rounding.",
+    "steps": [
+      "Enter fixed costs for one defined period or project.",
+      "Enter selling price per unit and variable cost per unit in the same currency.",
+      "Calculate the units needed to cover costs. Use the rounded-up whole-unit result when selling indivisible products."
+    ],
+    "faq": [
+      {
+        "question": "What if variable cost is at least the selling price?",
+        "answer": "There is no positive contribution available to cover fixed costs. A finite break-even quantity cannot be calculated under that pricing model."
+      }
+    ]
+  },
+  "bleed-trim": {
+    "description": "Calculate artwork size from trim dimensions and bleed on each side. Confirm print production dimensions before sending a file to your printer.",
+    "steps": [
+      "Enter the final trimmed width and height in the selected physical unit.",
+      "Enter the bleed required on each edge by your print supplier.",
+      "Calculate the complete artwork size, and extend the background into the bleed area in your design software."
+    ],
+    "faq": [
+      {
+        "question": "Is bleed the same as a safe text margin?",
+        "answer": "No. Bleed extends artwork beyond the trim edge. A safe margin keeps essential text and graphics inside the trim edge. Confirm both requirements with your printer."
+      }
+    ]
+  },
+  "print-size": {
+    "description": "Convert print dimensions between millimeters, inches and pixels at a chosen PPI. Understand exact physical units and rounded pixel dimensions.",
+    "steps": [
+      "Choose your source unit and enter the image or print dimensions.",
+      "Enter the intended image resolution in pixels per inch when converting to or from pixels.",
+      "Calculate the equivalent dimensions, then check the final requirements with your print supplier."
+    ],
+    "faq": [
+      {
+        "question": "Why does the converter ask for PPI?",
+        "answer": "Millimeters and inches are physical units. Pixels describe a digital grid. PPI links that grid to a physical print size; without it there is no single pixel-to-inch conversion."
+      }
+    ]
+  },
+  "video-size": {
+    "description": "Estimate video file size from duration and combined bitrate, or estimate bitrate from file size. Understand decimal units and container overhead.",
+    "steps": [
+      "Choose whether to estimate file size or the video bitrate budget.",
+      "Enter duration and audio bitrate, then supply either video bitrate or target file size as labeled.",
+      "Calculate an estimate and allow additional space for container overhead and encoder variation."
+    ],
+    "faq": [
+      {
+        "question": "Should I include audio bitrate?",
+        "answer": "Yes. Use the combined average bitrate of the video, audio and any other streams for a closer estimate. Variable bitrate and container overhead can change the final file size."
+      }
+    ]
+  },
+  "frames-duration": {
+    "description": "Convert video frames to duration or duration to frame count at a chosen frame rate. Check non-integer frame rates and whole-frame rounding.",
+    "steps": [
+      "Choose frames-to-duration or duration-to-frames.",
+      "Enter the frame count or time in seconds, then enter the frame rate used by your project.",
+      "Calculate the conversion and check whether whole-frame rounding is suitable for your timeline."
+    ],
+    "faq": [
+      {
+        "question": "Does this convert SMPTE drop-frame timecode?",
+        "answer": "No. This converts a frame count and elapsed seconds using a constant frame rate. Drop-frame timecode is a separate labeling convention and does not remove video frames."
+      }
+    ]
+  },
+  "image-resizer": {
+    "description": "Resize an image in your browser with a local preview and download. Set pixel dimensions and check aspect ratio without uploading your file.",
+    "steps": [
+      "Choose a supported image from your device.",
+      "Enter the desired pixel dimensions and choose whether to preserve the aspect ratio.",
+      "Process the image, inspect the preview and download the generated file."
+    ],
+    "faq": [
+      {
+        "question": "Will enlarging my image recover missing detail?",
+        "answer": "No. Browser resizing resamples existing pixels. Enlarging an image can make it softer and does not restore detail that was absent from the original."
+      }
+    ]
+  },
+  "image-compressor": {
+    "description": "Compress a supported image locally with JPEG or WebP quality controls. Compare the output size and preview before downloading.",
+    "steps": [
+      "Choose a supported source image from your device.",
+      "Select an output format and quality level.",
+      "Process the file, compare the output size with the original and download only if the result suits your needs."
+    ],
+    "faq": [
+      {
+        "question": "Why can the compressed image be larger?",
+        "answer": "A small or already optimized original may encode less efficiently with the selected settings. Check the measured output size; a quality setting cannot guarantee a smaller file."
+      }
+    ]
+  },
+  "image-converter": {
+    "description": "Convert a supported image to JPEG, PNG or WebP in your browser. Preview the result and understand transparency and metadata limits.",
+    "steps": [
+      "Choose a supported image from your device.",
+      "Choose an output format suited to the image and its intended use.",
+      "Process the conversion, review the preview and download the result."
+    ],
+    "faq": [
+      {
+        "question": "Which format should I choose?",
+        "answer": "JPEG is often suitable for photographs; PNG supports lossless output and transparency; WebP can offer smaller files in modern browsers. Conversion may discard metadata and does not preserve animation."
+      }
+    ]
+  },
+  "images-to-pdf": {
+    "description": "Create a PDF from supported images locally in your browser. Review page order, output size and image quality before downloading.",
+    "steps": [
+      "Select the supported images you want to include.",
+      "Review their order and the available page settings.",
+      "Process the images into a PDF and download the generated document."
+    ],
+    "faq": [
+      {
+        "question": "Will this make scanned text searchable?",
+        "answer": "No. This places image content on PDF pages. It does not perform optical character recognition or turn image text into selectable text."
+      }
+    ]
+  },
+  "pdf-merge": {
+    "description": "Combine supported PDF files locally in your browser. Review file order and download the merged document without a server upload.",
+    "steps": [
+      "Choose the PDF files to combine in the intended order.",
+      "Review supported-file and size limits before processing.",
+      "Process the merge, download the result and check every page before sharing it."
+    ],
+    "faq": [
+      {
+        "question": "Are signatures and interactive features preserved?",
+        "answer": "Do not rely on a merge to preserve digital signature validity, interactive forms, attachments or advanced document behavior. Keep the original files and review the output. Encrypted or unsupported PDFs may be rejected."
+      }
+    ]
+  }
+}
