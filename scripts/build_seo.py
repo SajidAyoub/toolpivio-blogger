@@ -12,6 +12,7 @@ import json
 import re
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
+from visuals import banner_css, render_banner, render_back_panel
 
 ROOT = Path(__file__).resolve().parents[1]
 HOST = 'https://sajidayoub.github.io/toolpivio-blogger'
@@ -81,7 +82,7 @@ def content_sections(tool, records):
     sections = instructions + f'<section class="guide"><h2>{formula_title}</h2><p class="formula">{escape(tool["formula"])}</p><h3>Worked example</h3><p>{escape(tool["example"])}</p></section><section class="guide"><h2>What to check before using the result</h2><p>{escape(tool["limitations"])}</p></section>'
     for item in tool.get('faq', []):
         sections += f'<section class="guide"><h2>{escape(item["question"])}</h2><p>{escape(item["answer"])}</p></section>'
-    sections += '<section class="guide"><h2>Related tools</h2>' + related_links(tool, records) + '</section>'
+    sections += '<section class="tp-page-related"><h2>Keep your workflow moving</h2>' + related_links(tool, records) + '</section>' + render_back_panel()
     return sections
 
 
@@ -98,19 +99,19 @@ def schema(tool):
 
 def render_hosted(tool, records):
     title = tool['title'] + ' | ToolPivio'
-    body = f'<p class="eyebrow">{escape(tool["category"])}</p><h1>{escape(tool["title"])}</h1><p class="intro">{escape(tool.get("intro", tool["description"]))}</p><p class="privacy">Free to use. No sign-up. Calculations and selected files are processed in your browser.</p>' + iframe(tool) + '<noscript><p>Enable JavaScript to use the tool. The explanation and worked example below are available without JavaScript.</p></noscript>' + content_sections(tool, records)
+    body = render_banner(tool['id'], title_tag='h1', title=tool['title']) + f'<p class="tp-page-intro">{escape(tool.get("intro", tool["description"]))}</p><p class="privacy">Free to use. No sign-up. Calculations and selected files are processed in your browser.</p>' + iframe(tool) + '<noscript><p>Enable JavaScript to use the tool. The explanation and worked example below are available without JavaScript.</p></noscript>' + content_sections(tool, records)
     return f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(tool['description'])}"><link rel="canonical" href="{escape(tool['canonical'])}"><meta property="og:type" content="website"><meta property="og:site_name" content="ToolPivio"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(tool['description'])}"><meta property="og:url" content="{escape(tool['canonical'])}"><meta name="twitter:card" content="summary"><style>{CSS}</style>{schema(tool)}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="nav"><a class="brand" href="../index.html">Tool<span>Pivio</span>.</a><nav aria-label="Main navigation"><a href="../index.html#tools">All tools</a><a href="{BLOG}/p/about.html">About</a><a href="{BLOG}/p/contact.html">Contact</a></nav></div></header><main id="main"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a><span aria-hidden="true"> / </span><span aria-current="page">{escape(tool['title'])}</span></nav>{body}</main><footer><p>ToolPivio · Smart Tools. Simple Solutions.</p><p><a href="{BLOG}/p/privacy-policy.html">Privacy policy</a><a href="{BLOG}/p/terms.html">Terms</a></p></footer><script>{RESIZE_JS}</script></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(tool['description'])}"><link rel="canonical" href="{escape(tool['canonical'])}"><meta property="og:type" content="website"><meta property="og:site_name" content="ToolPivio"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(tool['description'])}"><meta property="og:url" content="{escape(tool['canonical'])}"><meta name="twitter:card" content="summary"><style>{CSS}\n{banner_css()}</style>{schema(tool)}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="nav"><a class="brand" href="../index.html">Tool<span>Pivio</span>.</a><nav aria-label="Main navigation"><a href="../index.html#tools">All tools</a><a href="{BLOG}/p/about.html">About</a><a href="{BLOG}/p/contact.html">Contact</a></nav></div></header><main id="main"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a><span aria-hidden="true"> / </span><span aria-current="page">{escape(tool['title'])}</span></nav>{body}</main><footer><p>ToolPivio · Smart Tools. Simple Solutions.</p><p><a href="{BLOG}/p/privacy-policy.html">Privacy policy</a><a href="{BLOG}/p/terms.html">Terms</a></p></footer><script>{RESIZE_JS}</script></body></html>
 '''
 
 
 def render_blogger(tool, records):
     # Blogger renders the page title and owns head/canonical tags. No second h1.
-    body = f'<p>{escape(tool.get("intro", tool["description"]))}</p>' + iframe(tool, absolute=True)
+    body = '<style>' + banner_css() + '</style><div class="tp-page-content">' + render_banner(tool['id'], title=tool['title']) + f'<p class="tp-page-intro">{escape(tool.get("intro", tool["description"]))}</p>' + iframe(tool, absolute=True)
     body += '<noscript><p>Enable JavaScript to use the tool. The formula and worked example can also be used manually.</p></noscript>' + content_sections(tool, records)
     if tool['id'] in {'roas', 'margin', 'dpi'}:
         body += schema(tool)
-    return body + '\n'
+    return body + '</div>\n'
 
 
 def build(include_existing_blogger=False):
