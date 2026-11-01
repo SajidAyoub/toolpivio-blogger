@@ -62,8 +62,12 @@ def read_page_files():
         html = (ROOT / filename).read_text(encoding="utf-8").strip()
         if not html:
             raise SystemExit(f"Empty page: {filename}")
-        if marker and f'data-tool="{marker}"' not in html:
-            raise SystemExit(f"Missing calculator marker in {filename}")
+        if marker:
+            old_marker = f'data-tool="{marker}"' in html
+            hosted_url = f'https://sajidayoub.github.io/toolpivio-blogger/embed.html?tool={marker}'
+            hosted_marker = '<iframe' in html and f'src="{hosted_url}"' in html
+            if not (old_marker or hosted_marker):
+                raise SystemExit(f"Missing calculator marker or hosted iframe in {filename}")
         pages.append((title, html, expected_path, filename))
     return pages
 
