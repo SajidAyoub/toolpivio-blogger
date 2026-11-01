@@ -1,0 +1,166 @@
+{
+  "version": 4,
+  "visuals": {
+    "roas": {
+      "title": "ROAS Calculator",
+      "category": "Digital Marketing Calculators",
+      "benefit": "Put campaign revenue in perspective.",
+      "description": "A rising advertising revenue chart beside a compact teal calculator.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/roas.472323f5247c.svg"
+    },
+    "margin": {
+      "title": "Profit Margin Calculator",
+      "category": "E-commerce Calculators",
+      "benefit": "See what remains after your costs.",
+      "description": "A profit share ring beside two stacks of coins.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/margin.5bae5f594380.svg"
+    },
+    "dpi": {
+      "title": "Print DPI Calculator",
+      "category": "Packaging & Printing Tools",
+      "benefit": "Match image detail to your print size.",
+      "description": "A print layout with a magnifying lens revealing its pixel grid.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/dpi.d319e156e692.svg"
+    },
+    "cpc": {
+      "title": "CPC Calculator",
+      "category": "Digital Marketing Calculators",
+      "benefit": "Know what each advertising click costs.",
+      "description": "A pointer activating an advertising card beside a cost coin.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/cpc.b0d834824587.svg"
+    },
+    "cpm": {
+      "title": "CPM Calculator",
+      "category": "Digital Marketing Calculators",
+      "benefit": "Compare the cost of a thousand impressions.",
+      "description": "A grid of advertising cards with an eye representing repeated impressions.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/cpm.2c84c8d3657a.svg"
+    },
+    "ctr": {
+      "title": "CTR Calculator",
+      "category": "Digital Marketing Calculators",
+      "benefit": "Turn clicks and impressions into a clear rate.",
+      "description": "A field of impression markers with selected clicks and a percentage dial.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/ctr.3d02cabb5b72.svg"
+    },
+    "cpa": {
+      "title": "CPA Calculator",
+      "category": "Digital Marketing Calculators",
+      "benefit": "Understand the cost of each conversion.",
+      "description": "An advertising funnel leading to a customer and a cost coin.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/cpa.1a22d0207319.svg"
+    },
+    "discount": {
+      "title": "Discount Calculator",
+      "category": "E-commerce Calculators",
+      "benefit": "Find the sale price and your savings.",
+      "description": "A sale ticket with a percentage symbol beside a hanging price tag.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/discount.2cf75f767f6c.svg"
+    },
+    "markup": {
+      "title": "Markup Calculator",
+      "category": "E-commerce Calculators",
+      "benefit": "Price with a clearer view of cost.",
+      "description": "Three ascending cost and sale-price blocks beneath an upward arrow.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/markup.9cb7eaa955eb.svg"
+    },
+    "break-even": {
+      "title": "Break-even Calculator",
+      "category": "E-commerce Calculators",
+      "benefit": "Find the sales volume that covers your costs.",
+      "description": "Revenue and total-cost lines meeting at a highlighted break-even point.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/break-even.60934ae01726.svg"
+    },
+    "bleed-trim": {
+      "title": "Bleed & Trim Calculator",
+      "category": "Packaging & Printing Tools",
+      "benefit": "Allow the right space beyond the cut.",
+      "description": "A print artwork showing outer bleed, inner trim, and crop marks.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/bleed-trim.28bfee32826b.svg"
+    },
+    "print-size": {
+      "title": "Print Size Converter",
+      "category": "Packaging & Printing Tools",
+      "benefit": "Connect pixels with real print dimensions.",
+      "description": "An image frame beside horizontal and vertical rulers with conversion arrows.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/print-size.bd7921d00305.svg"
+    },
+    "video-size": {
+      "title": "Video File Size & Bitrate Calculator",
+      "category": "Video Production Calculators",
+      "benefit": "Plan your video size or bitrate budget.",
+      "description": "A video playback panel beside a storage drive and bitrate bars.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/video-size.aecddfed41b7.svg"
+    },
+    "frames-duration": {
+      "title": "Frames & Duration Converter",
+      "category": "Video Production Calculators",
+      "benefit": "Move between frame counts and running time.",
+      "description": "A sequence of film frames beside a clock measuring elapsed time.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/frames-duration.fdd7a6183745.svg"
+    },
+    "image-resizer": {
+      "title": "Image Resizer",
+      "category": "Image & PDF Tools",
+      "benefit": "Set the pixel dimensions your project needs.",
+      "description": "Nested image frames with arrows marking a change in dimensions.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/image-resizer.89305d2566f9.svg"
+    },
+    "image-compressor": {
+      "title": "Image Compressor",
+      "category": "Image & PDF Tools",
+      "benefit": "Compare image quality and file size.",
+      "description": "A picture between inward arrows beside a smaller output image.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/image-compressor.4c7b93f30648.svg"
+    },
+    "image-converter": {
+      "title": "Image Format Converter",
+      "category": "Image & PDF Tools",
+      "benefit": "Choose a format that fits your next step.",
+      "description": "Two image cards connected by circular format-conversion arrows.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/image-converter.984c798a2701.svg"
+    },
+    "images-to-pdf": {
+      "title": "Images to PDF",
+      "category": "Image & PDF Tools",
+      "benefit": "Bring your images together, one page at a time.",
+      "description": "Two image thumbnails flowing into a multipage document.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/images-to-pdf.c5ca2cecf130.svg"
+    },
+    "pdf-merge": {
+      "title": "PDF Merger",
+      "category": "Image & PDF Tools",
+      "benefit": "Keep your documents together and in order.",
+      "description": "Two separate documents gathering into one ordered document stack.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/pdf-merge.c3b60d3a75f7.svg"
+    },
+    "about": {
+      "title": "About ToolPivio",
+      "category": "About ToolPivio",
+      "benefit": "Useful tools for thoughtful everyday decisions.",
+      "description": "A teal toolkit with a calculator, ruler, and open carrying handle.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/about.cbdebb33cbaa.svg"
+    },
+    "contact": {
+      "title": "Contact ToolPivio",
+      "category": "Get in touch",
+      "benefit": "Share a question, report, or suggestion.",
+      "description": "An open envelope beneath a message bubble.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/contact.065acfdf3d2b.svg"
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy",
+      "category": "Your information",
+      "benefit": "Understand how your information is handled.",
+      "description": "A shield and padlock beside a device containing abstract data lines.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/privacy-policy.480e065d735b.svg"
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "category": "Using ToolPivio",
+      "benefit": "Know the terms before using the tools.",
+      "description": "An agreement document beside a teal pen.",
+      "artwork": "https://sajidayoub.github.io/toolpivio-blogger/assets/v4/terms.8e5dc4a63044.svg"
+    }
+  }
+}
