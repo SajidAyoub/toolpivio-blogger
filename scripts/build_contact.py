@@ -27,7 +27,7 @@ def load_config(root=ROOT):
 
 def build(root=ROOT):
     # Shared original artwork is supplied by the preceding page-banner phase.
-    from visuals import banner_css, render_banner
+    from visuals import banner_css, render_banner, render_back_panel
     endpoint = load_config(root)['endpoint']
     configured = bool(endpoint)
     css = (root / 'src/contact/contact.css').read_text(encoding='utf-8') + '\n' + banner_css()
@@ -68,6 +68,7 @@ def build(root=ROOT):
     blogger += '<div class="toolpivio-contact"><iframe data-toolpivio-contact="true" title="Contact ToolPivio — message and draft workspace" src="' + HOST + '/contact.html" width="100%" height="1400" style="display:block;width:100%;max-width:100%;height:1400px;border:0;background:#fff;border-radius:16px" loading="eager" referrerpolicy="no-referrer" sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>'
     blogger += '<p>If the workspace does not load, <a href="' + HOST + '/contact.html" target="_blank" rel="noopener noreferrer">open the contact form and draft workspace directly</a>.</p><noscript><p>The workspace also opens directly without JavaScript. ' + ('Use its native form to complete any provider confirmation in a separate tab.' if configured else 'Delivery remains unavailable until a real contact endpoint is configured.') + '</p></noscript>'
     blogger += '<p>Please do not include passwords, tokens or sensitive private details. Read the <a href="https://toolpivio.blogspot.com/p/privacy-policy.html">privacy policy</a> before submitting a contact message. Replies and response times are not guaranteed.</p>'
+    blogger += render_back_panel(contact=False)
     (root / 'pages/contact.html').write_text(blogger + '\n', encoding='utf-8')
     print('Built contact workspace and Blogger iframe: ' + ('provider configured; real receipt still requires owner verification' if configured else 'inactive delivery; local draft only'))
 

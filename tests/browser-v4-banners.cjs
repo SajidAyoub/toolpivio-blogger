@@ -72,10 +72,10 @@ function fixture(id,file) {
       if(url.origin!==PAGES||!url.pathname.startsWith(PREFIX))return route.abort();
       const target=path.resolve(ROOT,'docs',url.pathname.slice(PREFIX.length));
       if(!target.startsWith(path.join(ROOT,'docs')+path.sep)||!fs.existsSync(target))return route.abort();
-      return route.fulfill({contentType:target.endsWith('.svg')?'image/svg+xml':'text/html',body:fs.readFileSync(target)});
+      return route.fulfill({contentType:target.endsWith('.svg')?'image/svg+xml':target.endsWith('.css')?'text/css':'text/html',body:fs.readFileSync(target)});
     });
     const fallback=await nojs.newPage();
-    for(const id of infos){await fallback.goto(PAGES+PREFIX+'info/'+id+'.html');assert.ok((await fallback.locator('.tp-page-article').innerText()).trim().length>80,id+' meaningful static copy');assert.ok(await fallback.locator('.tp-page-banner').isVisible());}
+    for(const id of infos){await fallback.goto(PAGES+PREFIX+'info/'+id+'.html');const content=id==='contact'&&await fallback.locator('#contact-main').count()?fallback.locator('#contact-main'):fallback.locator('.tp-page-article');assert.ok((await content.innerText()).trim().length>80,id+' meaningful static copy');assert.ok(await fallback.locator('.tp-page-banner').isVisible());}
     await nojs.close();
     assert.deepEqual(errors,[]);
     assert.deepEqual(missing,[]);
