@@ -2,9 +2,9 @@
   "name": "toolpivio-blogger",
   "private": true,
   "scripts": {
-    "build": "python3 scripts/build.py && python3 scripts/build_embed.py && python3 scripts/build_seo.py && python3 scripts/build_info.py",
+    "build": "python3 scripts/build.py && python3 scripts/build_embed.py && python3 scripts/build_seo.py && python3 scripts/build_info.py && python3 scripts/build_contact.py",
     "test": "node --test tests/*.test.cjs && python3 scripts/validate.py && python3 -m unittest discover -s tests -p '*_test.py' && python3 tools/page_registry.py",
-    "test:browser": "node scripts/browser-smoke.cjs && node scripts/browser-numeric.cjs && node tests/image-browser.cjs && node scripts/browser-integration.cjs && node scripts/browser-v4-cards.cjs && node tests/browser-v4-banners.cjs"
+    "test:browser": "node scripts/browser-smoke.cjs && node scripts/browser-numeric.cjs && node tests/image-browser.cjs && node scripts/browser-integration.cjs && node scripts/browser-v4-cards.cjs && node tests/browser-v4-banners.cjs && node tests/contact-browser.cjs"
   },
   "devDependencies": {
     "pdf-lib": "1.17.1",
