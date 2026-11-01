@@ -13,3 +13,4 @@ jobs:
           python-version: '3.x'
       - run: npm run build && npm test
       - run: git diff --exit-code -- dist
+      - run: python scripts/build_embed.py && git diff --exit-code -- docs/embed.html
