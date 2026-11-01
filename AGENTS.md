@@ -1,4 +1,4 @@
-# ToolPivio — Codex Project Rules
+> **CURRENT PRODUCTION OVERRIDE (Nov 2026):** Owner installed V3 on live Blogger and reviewed homepage showing 19 cards. Read `docs/CODEX_V4_PREMIUM_UPGRADE.md` for the next V4 development task. References below describing V2 as the LIVE theme are historical; V2 remains the stable Contempo base used to generate V3/V4. Preserve the current V3 live site, native Blog1 widget, active URLs, working tools and existing deployment pipelines. Fix raw `&#8594;` card arrows and build a truthful functioning contact integration as detailed in V4 brief. Do not auto-merge V4 PRs or claim contact email is configured without real verification.\n\n# ToolPivio — Codex Project Rules
 
 **Read `docs/CODEX_SITE_MASTER_PLAN.md` before making design, tool, content, SEO, or publishing changes.**
 
