@@ -1,28 +1,22 @@
-# Release validation
+# V3 validation evidence
 
-## Completed locally
+Checks run locally on November 1, 2026. Production Blogger/GitHub Pages access was blocked by the execution environment, so none of these checks establish live deployment or indexing.
 
-- `npm run build`: deterministic self-contained XML and standalone preview.
-- Six Node test cases: ROAS and margin examples, break-even, losses, zero revenue where permitted, decimal/string amounts, inch/cm conversion, unequal print axes, empty/whitespace/missing/negative/nonnumeric/infinite values, zero divisors, fractional pixels, invalid units, and numeric overflow.
-- XML parsed successfully with Python ElementTree; Blogger namespaces, skin, Blog widget, expected Page links, and embedded JavaScript syntax checked. Theme is below 100 KB.
-- Chromium with Playwright: search, category filters, empty state, all three calculator results, missing-value errors, clearing stale results, reset, and no horizontal overflow at 360, 768, and 1440 px. No browser JavaScript exceptions. Desktop preview visually reviewed.
-- All source and assets are local. No runtime API requests or external font/image dependencies.
+- `npm run build`: deterministic V3 release XML, hosted runtime/catalog, nineteen guides, sixteen new Blogger bodies and canonical-only sitemap. A second build leaves generated files clean.
+- `npm test`: original and extended formula/validation suites; SEO output checks; twelve mocked publisher tests; all twenty-three registered Blogger sources validate without Google credentials or writes.
+- XML parser and embedded JavaScript checks pass. The entire native `Blog1` subtree matches the restored working V2 reference. Root V2 and the historical `dist/toolpivio.xml` are untouched. The installable release is `releases/ToolPivio_V3_Ready_For_Blogger.xml`.
+- V3 browser checks: search, category filtering, empty state, catalog URL validation, mobile menu/Escape, visually hidden duplicate embed headings, unknown-tool handling, iframe resizing with foreign-origin rejection and a native-class About visibility fixture.
+- Numeric browser checks: all fourteen numeric tools, worked examples, Enter submission, missing/negative input errors, stale-result clearing, Reset and alternate units/modes. Original examples remain ROAS 5×/500%, margin 40%, and print 300 PPI.
+- File browser checks: real PNG/JPG/WebP outputs, dimensions/aspect ratio, transparency/white JPEG background, quality controls, preview/download, invalid/corrupt/oversized inputs, Reset and samples. PDF creation/merge page content and order are independently parsed with pypdf; encrypted inputs are rejected.
+- Integration browser checks: all nineteen generated guide documents load their actual built iframe runtime, calculate/process samples and Reset. PDF assets load locally. Canonical and heading counts, catalog links, no unexpected external requests and no page exceptions are checked.
+- Browser suites cover 360, 768 and 1440 px layouts. Desktop/mobile screenshots were visually reviewed. No Lighthouse score or accessibility-conformance claim is inferred from these tests.
 
-## Required Blogger staging checks
+## Remaining owner checks
 
-Local preview does not emulate Blogger's server rendering. Before approving live deployment:
+Review and merge the three PRs in order using **Create a merge commit** to preserve their shared ancestry. Wait for Pages and the selective Blogger publisher. Inspect the actual returned new-page URLs; expected paths remain provisional until verified. Check each new tool at its public hosted URL, including an image/PDF download.
 
-- Import XML on a test blog. Confirm Blogger accepts template expressions and provides the Blog widget's inherited comment includables.
-- Create all seven Pages, confirm generated paths, and verify each navigation/footer/tool link returns the correct Page.
-- Confirm the HTML editor retains `data-tool` markers and the theme script mounts exactly one calculator per tool Page. Test examples, invalid values, reset, unit selection, keyboard focus, and announcements with a screen reader.
-- Confirm Contact comments work with the chosen Blogger settings; verify moderation and Google account requirements. The theme cannot supply private messaging without a real contact channel.
-- Confirm homepage-only catalog, Page titles/body, 404, custom-domain HTTPS, mobile `?m=1`, and landscape/tablet layouts.
-- Inspect rendered HTML for one main H1 per tool Page, canonical URL, description, title, and valid structured data. Validate with Google's Rich Results Test; Organization markup need not produce a rich result.
-- Run Lighthouse and manual keyboard/screen-reader checks on the actual blog. No accessibility conformance or performance score is claimed from local checks.
-- Check generated Blogger scripts/cookies and align policy/consent behavior with actual settings.
+Back up the current Blogger theme, install only the approved V3 release XML manually, then check About, all three established URLs, mobile layout, keyboard navigation, iframe fitting and Reset. Local fixtures do not emulate Blogger's server-side renderer.
 
-## Scope and limitations
+Inspect the rendered `<head>` for one intended title, description and canonical, including mobile query URLs. Run structured-data and mobile performance checks on deployed pages. Complete the Search Console verification, sitemap and indexing steps in [SEO_DEPLOYMENT.md](SEO_DEPLOYMENT.md). No account verification, search ranking, new Blogger URL or public deployment has been assumed.
 
-Three working calculators; the five category filters intentionally include categories with no released tools. No image upload, PDF processing, video calculator, accounts, analytics, ads, payment, or private contact backend is advertised. Print DPI reports effective image PPI, not physical printer dot resolution. Binary floating point and two-decimal display rounding apply; these are planning tools, not accounting-grade decimal arithmetic.
-
-The standalone preview combines homepage and tool bodies for review. Its root-relative Blogger links are intentionally tested after installation, not by opening the preview file. XML validation establishes well-formedness, not acceptance by Blogger. No live Blogger publication is part of this phase.
+Supported file formats, processing limits and PDF limitations are listed in [FILE_TOOLS.md](FILE_TOOLS.md). See [V3_INSTALL.md](V3_INSTALL.md) and [TOOLS_DEPLOYMENT.md](TOOLS_DEPLOYMENT.md) for installation and separate theme/runtime/content rollback.
