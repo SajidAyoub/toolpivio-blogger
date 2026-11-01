@@ -17,3 +17,16 @@ jobs:
       - run: npm run build && npm test
       - run: npm run test:browser
       - run: git diff --exit-code -- dist releases docs pages
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: toolpivio-v4-browser-screenshots
+          retention-days: 7
+          if-no-files-found: ignore
+          path: |
+            work/v4-cards-1440.png
+            work/v4-touch-390.png
+            work/v4-banner-roas-360.png
+            work/v4-banner-about.png
+            work/contact-inactive-390.png
+            work/contact-configured-test-390.png

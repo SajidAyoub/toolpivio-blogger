@@ -115,6 +115,10 @@ if (ROOT / 'src/seo.json').exists():
         fallback += '<b:if cond="'+escape(condition)+'"><meta name="description" content="'+escape(descriptions[tool_id]['description'])+'"/><meta property="og:description" content="'+escape(descriptions[tool_id]['description'])+'"/></b:if>'
     xml = xml.replace('</head>', fallback+'</head>', 1)
 xml = xml.replace('Free online calculators for marketing, commerce and print projects. Clear inputs, practical formulas and useful answers.', 'Free online calculators and tools for marketing, commerce, print, video, images and PDF work. Clear inputs, practical formulas and useful answers.', 1)
+home_title = 'ToolPivio — Free Calculators & Online Tools'
+home_description = 'Free online calculators and tools for marketing, commerce, print, video, images and PDF work. Clear inputs, practical formulas and useful answers.'
+xml = xml.replace('<meta property="og:title" expr:content="data:view.title.escaped"/>', '<b:if cond="data:view.isHomepage"><meta property="og:title" content="'+escape(home_title)+'"/><b:else/><meta property="og:title" expr:content="data:view.title.escaped"/></b:if>', 1)
+xml = xml.replace('</head>', '<b:if cond="data:view.isHomepage and !data:blog.metaDescription"><meta property="og:description" content="'+escape(home_description)+'"/></b:if></head>', 1)
 assert blog_before == ET.tostring(ET.fromstring(xml).find('.//b:widget[@id="Blog1"]',NS)), 'Native Blog1 changed'
 write('releases/ToolPivio_V4_Ready_For_Blogger.xml', xml)
 public_tools = [{k:t[k] for k in ['id','title','description','category','categories','icon','url','illustration'] if k in t} for t in TOOLS]
@@ -123,6 +127,8 @@ base_css = base[base.index('/* ===== ToolPivio design overrides ===== */'):base.
 site_head = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolPivio — Free Calculators &amp; Online Tools</title><meta name="description" content="Free browser calculators for marketing, commerce and print projects. Explore useful tools with clear formulas and examples."/><link rel="canonical" href="'+BLOG+'/"/><style>html,body{margin:0;font:16px/1.6 system-ui,sans-serif}a{color:#087f75}button,input{font:inherit}svg{max-width:100%}'+base_css+'\n'+css+'</style></head><body>'
 site_head=site_head.replace('</head>', '<script type="application/ld+json">'+json.dumps({'@context':'https://schema.org','@type':'WebSite','name':'ToolPivio','url':BLOG+'/'})+'</script></head>')
 site_head=site_head.replace('Free browser calculators for marketing, commerce and print projects. Explore useful tools with clear formulas and examples.', 'Free browser tools for marketing, commerce, print, video, images and PDFs. Explore useful calculators and file utilities with clear examples.')
+social = {'og:type':'website', 'og:site_name':'ToolPivio', 'og:title':home_title, 'og:description':'Free browser tools for marketing, commerce, print, video, images and PDFs. Explore useful calculators and file utilities with clear examples.', 'og:url':BLOG+'/'}
+site_head=site_head.replace('</head>', ''.join('<meta property="'+key+'" content="'+escape(value)+'"/>' for key,value in social.items())+'<meta name="twitter:card" content="summary"/></head>', 1)
 site = site_head+header.replace(BLOG+'/#tools','#tools')+'<main id="main">'+home+'</main>'+footer+'<script>'+sitejs+'</script></body></html>\n'
 write('dist/preview.html', site)
 write('docs/index.html', site)

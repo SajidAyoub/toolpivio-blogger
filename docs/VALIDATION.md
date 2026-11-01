@@ -1,4 +1,21 @@
-# V3 validation evidence
+# Release validation
+
+## V4 — November 2, 2026
+
+The owner reports V3 is installed and most tools have been tested live. The checks below independently exercise the local V4 build; they do not certify Blogger production rendering, Google indexing or contact email receipt.
+
+- `npm run build` and a second clean build pass. The generated V4 XML, compatible catalog, 23 cache-addressed SVG assets, nineteen tool guides, four information aliases and contact workspace remain in sync with source.
+- `npm test` passes four Node suites, 22 Python tests and validation of all 23 registered Blogger sources. Checks cover formulas, finite/invalid inputs, preserved canonical and sitemap policy, true schema, banner coverage, strict contact configuration and publisher behavior.
+- All seven Chromium suites pass: prior V3 navigation/resizing, fourteen numeric tools, real image/PDF downloads independently parsed by pypdf, integration of nineteen built guides, V4 static/dynamic/no-JS cards, all23 banners and contact request handling.
+- V4 layouts cover 360/390/768/1024/1440px. Cards support center/corners/CTA/Enter activation, text selection, correct SVG arrows, hover/focus/touch artwork and reduced motion. Screenshots were visually reviewed; CI uploads selected screenshots as `toolpivio-v4-browser-screenshots` for seven days.
+- Contact tests intercept every provider request. They verify inactive/no-Send/no-JS behavior, Copy/Clear, validation/consent/honeypot, duplicate prevention, provider acceptance versus inbox delivery, rejection/422/429/network failures and retained drafts without automatic retries. The actual public endpoint is empty and no message was sent.
+- A real locally routed Contact iframe fits its content and rejects resize messages from a foreign origin or wrong window. Blogger native-class fixtures preserve visible bodies and one parent H1; they are not a Blogger server emulator.
+- The complete native Blog1 subtree and historical V2/V3/legacy theme files remain unchanged. Calculator/formula/file-processing sources, generated calculator runtime and authenticated publisher/retry sources are unchanged from the V3 base.
+- Search Console, public response codes, rendered native head output, mobile field performance and canonical choices remain owner checks. The additional sixteen Blogger copies still need verified returned permalinks and cross-host canonical inspection; no canonical migration was invented.
+
+Use [V4_INSTALL.md](V4_INSTALL.md) for the ordered PRs, separate deployment tracks and rollback. Use [CONTACT_EMAIL_SETUP.md](CONTACT_EMAIL_SETUP.md) before claiming Gmail delivery, and [SEO_V4_OWNER_CHECKLIST.md](SEO_V4_OWNER_CHECKLIST.md) for indexing/account actions.
+
+## Historical V3 validation evidence
 
 Checks run locally on November 1, 2026. Production Blogger/GitHub Pages access was blocked by the execution environment, so none of these checks establish live deployment or indexing.
 
