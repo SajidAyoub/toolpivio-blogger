@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "preview is read-only; apply creates missing pages; replace updates matching titles"
+        description: "preview checks; apply creates missing; calculators updates only 3; replace updates all pages"
         required: true
         default: preview
         type: choice
-        options: [preview, apply, replace]
+        options: [preview, apply, replace, calculators]
   push:
     branches: [main]
     paths:
@@ -73,6 +73,7 @@ jobs:
         run: |
           if [ -z "$BLOGGER_AUTH_JSON" ]; then echo "Missing BLOGGER_AUTH_JSON"; exit 1; fi
           case "$MODE" in
+            calculators) python tools/blogger_publish.py sync --apply --replace-existing --only-file pages/roas.html --only-file pages/profit-margin.html --only-file pages/print-dpi.html ;;
             replace) python tools/blogger_publish.py sync --apply --replace-existing ;;
             apply) python tools/blogger_publish.py sync --apply ;;
             *) python tools/blogger_publish.py sync ;;
