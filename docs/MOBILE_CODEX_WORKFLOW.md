@@ -28,3 +28,10 @@ Sample command to paste into Codex:
 - Actions: https://github.com/SajidAyoub/toolpivio-blogger/actions/workflows/blogger-pages.yml
 - Live website: https://toolpivio.blogspot.com/
 - Unverified Blogger theme fix: https://github.com/SajidAyoub/toolpivio-blogger/pull/3
+
+## Preferred calculator workflow (Nov 2026)
+1. Source files: `src/calculators.js`, `src/app.js`, `src/styles.css`, `src/embed_template.html`.
+2. On calculator changes, run `python scripts/build_embed.py` to regenerate `docs/embed.html`; CI checks that generated file matches source.
+3. GitHub Pages must be enabled (Settings → Pages → Deploy from a branch → main → /docs). Existing Blogger pages embed `docs/embed.html?tool=...` from hosted GitHub Pages after PR #4 is merged.
+4. With this setup, editing calculators via Codex and merging PR updates GitHub Pages automatically; editing known Blogger page texts auto-publishes through Blogger API. **Theme XML still needs manual upload** if redesigned.
+5. PR #4 is pending live GitHub Pages enable/verification; do not merge blindly while embed URL is unavailable.
