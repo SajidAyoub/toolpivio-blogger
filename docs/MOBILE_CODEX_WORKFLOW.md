@@ -35,3 +35,12 @@ Sample command to paste into Codex:
 3. GitHub Pages must be enabled (Settings → Pages → Deploy from a branch → main → /docs). Existing Blogger pages embed `docs/embed.html?tool=...` from hosted GitHub Pages after PR #4 is merged.
 4. With this setup, editing calculators via Codex and merging PR updates GitHub Pages automatically; editing known Blogger page texts auto-publishes through Blogger API. **Theme XML still needs manual upload** if redesigned.
 5. PR #4 is pending live GitHub Pages enable/verification; do not merge blindly while embed URL is unavailable.
+
+
+## CONFIRMED LIVE — November 1, 2026 (current instructions)
+- GitHub Pages /docs is enabled, and PR #4 is merged. The three calculators are functional live on Blogger, including Calculate and Reset. Earlier warnings above about pending PR #4 and blank page body are historical.
+- For calculator functionality changes: edit source, run `python scripts/build_embed.py` and tests, commit `docs/embed.html` with changed sources, open PR; after merge, GitHub Pages deploys updated runtime. Blogger Page HTML does not need republishing unless its explanatory text or iframe URL changes.
+- For changes to any of the seven existing Blogger pages: edit `pages/*.html`, open PR; merge triggers existing Blogger API deployment. The Google production OAuth token is stored in GitHub Actions secret; NEVER include it in prompts, output, or commits.
+- For layout/header/footer/category card changes: live Contempo-based ToolPivio V2 theme must be preserved. Old `dist/toolpivio.xml` is not the installed theme. Ask the owner to add the live V2 XML to GitHub before attempting a theme redesign; theme changes then require a manual Blogger upload.
+- Known UI polish items for next Codex task: avoid duplicate H1/iframe heading and eliminate Print DPI iframe nested scrollbar without breaking calculator tests or SEO article text.
+- Suggested phone/desktop task prompt: "In SajidAyoub/toolpivio-blogger on main, read AGENTS.md, improve [specific calculator], keep current Blogger V2 styling and existing live pages intact, regenerate docs/embed.html, run checks, create PR, do not merge. Tell me what will deploy automatically vs require manual theme action."
