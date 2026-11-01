@@ -27,3 +27,11 @@ You are working on ToolPivio, a Blogger-hosted free-tools site.
 - Blogger API publishing was verified by the user's CMD and GitHub Actions was green after PR #2, but live About page screenshot showed a blank page body beneath the header.
 - PR #3 (fix/blogger-blog1-page-rendering) is a proposed theme fix, not yet proven live. Do not assume content rendering is repaired. Leave this theme deployment/testing for the user's next desktop session unless specifically requested.
 - No need to repeat OAuth setup unless the token expires or GitHub Actions starts failing.
+
+## November 1, 2026: standalone hosted calculators (preferred)
+- Functional calculator embed source is built by `python scripts/build_embed.py` from `src/embed_template.html`, `src/styles.css`, `src/app.js`, `src/calculators.js`. It generates `docs/embed.html`.
+- GitHub Pages should be configured **once** under Settings → Pages → Deploy from branch: `main` and folder `/docs`. Until enabled and verified, the hosted embed URL is not confirmed live.
+- Hosted calculator URL: `https://sajidayoub.github.io/toolpivio-blogger/embed.html?tool=roas` (or `margin`, `dpi`).
+- PR #4 replaces the three existing Blogger page calculator placeholder divs with accessible iframe embeds. **Do not merge until GitHub Pages is enabled and the embed URL works.** After merge, Blogger Pages GitHub Action deploys the three pages automatically.
+- For *future calculator changes*, edit source files and regenerate `docs/embed.html`; GitHub Pages publishes updated `docs` assets upon approved merge. Updates to known Blogger page text still auto-deploy via Blogger API. For a **new tool** you must update registry, Blogger page, navigation links, and embed generator; do not assume new page discovery automatically.
+- Live Blogger theme is a working Contempo-based ToolPivio V2 applied manually; the repository's old theme generator `scripts/build.py` and `dist/toolpivio.xml` are **not** that live theme. Do not upload old dist XML or call it the current live template. Preserve the working Blogger appearance until source is synced.
