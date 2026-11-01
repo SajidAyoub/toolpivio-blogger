@@ -23,4 +23,7 @@ for slug in ['roas','profit-margin','print-dpi']:
 assert 'tp-art-title' in release.read_text()
 assert 'ToolPivio:resize' in release.read_text()
 assert 'catalog.v3.js' in release.read_text()
+assert 'tp-page-heading' in release.read_text(), 'Static Blogger Pages need a semantic main heading'
+for slug in ['roas','profit-margin','print-dpi']:
+    assert f'canonicalUrl == &quot;https://toolpivio.blogspot.com/p/{slug}-calculator.html&quot;' in release.read_text()
 print('V3 XML, unchanged native Blog1 renderer, head ownership, schema, inline JS and existing URLs validated.')
