@@ -1,31 +1,87 @@
+"""Build V3 around the trusted Contempo theme; never replace its Blog1 renderer."""
 from pathlib import Path
-import json, html
-root=Path(__file__).resolve().parents[1]
-def read(p): return (root/p).read_text()
-tools=json.loads(read('src/tools.json'))
-categories=['All tools','Image & PDF Tools','Digital Marketing Calculators','Packaging & Printing Tools','E-commerce Calculators','Video Production Calculators']
-cards=''
-for t in tools:
- cats=t['category']+('|Image & PDF Tools' if t['slug']=='print-dpi' else '')
- cards+=f'''<article class="card" data-categories="{html.escape(cats,quote=True)}"><span class="icon" aria-hidden="true">{t['icon']}</span><p class="tag">{html.escape(t['category'])}</p><h3>{t['title']}</h3><p>{t['description']}</p><a href="/p/{t['slug']}-calculator.html">Open calculator <span aria-hidden="true">→</span></a></article>'''
-# Slugs are centralized here and in installation docs.
-filters=''.join(f'<button type="button" data-filter="{html.escape(c,quote=True)}" aria-pressed="{str(i==0).lower()}">{html.escape(c)}</button>' for i,c in enumerate(categories))
-header='''<a class="skip" href="#main">Skip to content</a><header><div class="wrap nav"><a class="brand" href="/">Tool<span>Pivio</span><span aria-hidden="true">.</span></a><nav aria-label="Main navigation"><a href="/#tools">All tools</a><a href="/p/about.html">About</a><a href="/p/contact.html">Contact</a></nav></div></header>'''
-home='''<section class="hero"><div class="wrap"><p class="eyebrow">Small calculations. Better decisions.</p><h1>Smart Tools.<br/><span>Simple Solutions.</span></h1><p class="lead">Less guesswork. More clarity. Free calculators for your next campaign, product, or print project.</p><div class="trust"><span>✓ Free to use</span><span>✓ No sign-up</span><span>✓ Calculations stay in your browser</span></div></div></section><section class="catalog wrap" id="tools" aria-labelledby="tools-title"><div class="catalog-top"><div><p class="eyebrow">Your everyday toolkit</p><h2 id="tools-title">Find your next solution</h2></div><div class="search"><label for="tool-search">Search tools</label><input id="tool-search" type="search" placeholder="Try “profit” or “print”…"/></div></div><div class="filters" aria-label="Filter tools by category">'''+filters+'''</div><p id="search-status" role="status" aria-live="polite">3 tools available</p><div class="cards">'''+cards+'''</div><p class="empty" id="no-tools" hidden="hidden">No tools match this selection yet. Try another category or search.</p><div class="note"><h2>Useful tools. Clear answers.</h2><p>Start with our three free calculators. Each includes a formula, a worked example, and clear results. More categories will grow as new tools are ready.</p><p>Video production tools are not available in this release.</p></div><noscript><p class="noscript">Enable JavaScript for search, filters, and calculators. All available tools are linked above.</p></noscript></section>'''
-footer='''<footer><div class="wrap footer-row"><div><a class="brand" href="/">ToolPivio.</a><p>Smart Tools. Simple Solutions.</p><p>Free tools for thoughtful decisions.</p></div><div class="footer-links"><a href="/p/about.html">About</a><a href="/p/contact.html">Contact</a><a href="/p/privacy-policy.html">Privacy Policy</a><a href="/p/terms.html">Terms</a></div></div></footer>'''
-js=read('src/calculators.js')+'\n'+read('src/app.js')
-xml='''<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html>
-<html b:version="2" class="v2" expr:dir="data:blog.languageDirection" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr">
-<head><meta content="width=device-width, initial-scale=1" name="viewport"/>
-<b:include data="blog" name="all-head-content"/>
-<title><data:blog.pageTitle/></title>
-<b:if cond="data:blog.url == data:blog.homepageUrl"><meta name="description" content="Free ROAS, profit margin, and print DPI calculators. ToolPivio makes everyday marketing, e-commerce, and printing calculations simple."/></b:if>
-<meta property="og:site_name" content="ToolPivio"/><meta property="og:title" expr:content="data:blog.pageTitle"/><meta property="og:url" expr:content="data:blog.canonicalUrl"/><meta property="og:type" content="website"/>
-<b:skin><![CDATA['''+read('src/styles.css')+''']]></b:skin></head><body>'''+header+'''<main id="main"><b:if cond="data:blog.url == data:blog.homepageUrl">'''+home+'''</b:if><b:section id="main-content" class="main-content" maxwidgets="1" showaddelement="no"><b:widget id="Blog1" locked="true" title="Page content" type="Blog" version="1"><b:includable id="main" var="top"><b:if cond="data:blog.url != data:blog.homepageUrl"><b:loop values="data:posts" var="post"><article class="page"><h1><data:post.title/></h1><div class="article-body"><data:post.body/></div><b:if cond="data:post.allowComments"><b:include data="post" name="comments"/></b:if></article></b:loop><b:if cond="data:blog.pageType == &quot;error_page&quot;"><article class="page"><h1>Page not found</h1><p>This page is unavailable. <a href="/">Explore our tools</a>.</p></article></b:if></b:if></b:includable></b:widget></b:section></main>'''+footer+'''<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ToolPivio","slogan":"Smart Tools. Simple Solutions."}</script><script type="text/javascript"><![CDATA['''+js+''']]></script></body></html>'''
-(root/'dist/toolpivio.xml').write_text(xml)
-preview='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolPivio preview</title><style>'+read('src/styles.css')+'</style></head><body>'+header+'<main id="main">'+home
-for t in tools: preview+='<article class="page"><h1>'+t['title']+'</h1>'+t['body']+'</article>'
-preview+='</main>'+footer+'<script>'+js+'</script></body></html>'
-(root/'dist/preview.html').write_text(preview)
-print('Built dist/toolpivio.xml and dist/preview.html')
+import html
+import json
+import re
+import xml.etree.ElementTree as ET
+
+ROOT = Path(__file__).resolve().parents[1]
+PAGES = 'https://sajidayoub.github.io/toolpivio-blogger/'
+BLOG = 'https://toolpivio.blogspot.com'
+NS = {'b': 'http://www.google.com/2005/gml/b', 'h': 'http://www.w3.org/1999/xhtml'}
+def read(path): return (ROOT / path).read_text(encoding='utf-8')
+def escape(value): return html.escape(str(value), quote=True)
+def cdata(value): return '<![CDATA[' + value.replace(']]>', ']]]]><![CDATA[>') + ']]>'
+def write(path, value):
+    target = ROOT / path
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(value, encoding='utf-8')
+
+def catalog():
+    result = []
+    for index, item in enumerate(json.loads(read('src/tools.json'))):
+        entry = dict(item)
+        entry['id'] = ['roas', 'margin', 'dpi'][index]
+        entry['url'] = BLOG + '/p/' + entry['slug'] + '-calculator.html'
+        entry['categories'] = entry['category'] + ('|Image & PDF Tools' if entry['id'] == 'dpi' else '')
+        result.append(entry)
+    for path in ['src/new-tools.json', 'src/file-tools.json']:
+        if (ROOT / path).exists():
+            for item in json.loads(read(path)):
+                entry = dict(item)
+                if not re.fullmatch(r'[a-z0-9-]+', entry['id']):
+                    raise ValueError('Invalid tool id')
+                entry['url'] = PAGES + 'tools/' + entry['id'] + '.html'
+                entry['categories'] = entry['category']
+                result.append(entry)
+    assert len({item['id'] for item in result}) == len(result), 'Duplicate tool id'
+    return result
+
+TOOLS = catalog()
+CATEGORIES = [('All tools','All tools'), ('Digital Marketing Calculators','Marketing'), ('E-commerce Calculators','E-commerce'), ('Packaging & Printing Tools','Printing'), ('Video Production Calculators','Video'), ('Image & PDF Tools','Image & PDF')]
+mark = '<svg class="tp-brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M9 10h14M16 10v13m-6-7h12" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>'
+brand = mark + '<span class="tp-brand-word">Tool<span>Pivio</span>.</span>'
+header = '<a class="tp-skip" href="#main">Skip to content</a><header class="tp-header"><div class="tp-wrap tp-nav"><a class="tp-brand" href="'+BLOG+'/" aria-label="ToolPivio home">'+brand+'</a><button class="tp-menu" type="button" aria-controls="tp-navigation" aria-expanded="false" hidden="hidden">Menu</button><nav class="tp-links" id="tp-navigation" aria-label="Main navigation"><a href="'+BLOG+'/#tools">All tools</a><a href="'+BLOG+'/p/about.html">About</a><a href="'+BLOG+'/p/contact.html">Contact</a><a class="tp-nav-cta" href="#tools">Explore tools <span aria-hidden="true">→</span></a></nav></div></header>'
+# Homepage anchors stay local; on Blogger content pages the main CTA goes home.
+header_theme = header.replace('href="#tools"', 'href="/#tools"')
+check = '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+icons = {
+'Digital Marketing Calculators':'<path d="M4 17l5-6 4 3 7-10M15 4h5v5"/>',
+'E-commerce Calculators':'<path d="M6 5h12v15H6zM9 5V3h6v2M9 10h6m-6 4h6"/>',
+'Packaging & Printing Tools':'<path d="M7 8V3h10v5M7 17H4V8h16v9h-3M7 14h10v7H7zM16 11h1"/>',
+'Video Production Calculators':'<path d="M3 5h13v14H3zM16 9l5-3v12l-5-3"/>',
+'Image & PDF Tools':'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M4 17l5-6 4 4 4-5 4 6"/><circle cx="8" cy="8" r="1"/>'}
+def icon(category): return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons.get(category,icons['Digital Marketing Calculators'])+'</svg>'
+def cards(items):
+    return ''.join('<article class="tp-card" data-categories="'+escape(t['categories'])+'"><span class="tp-icon" aria-hidden="true">'+icon(t['category'])+'</span><p class="tp-tag">'+escape(t['category'])+'</p><h3>'+escape(t['title'])+'</h3><p>'+escape(t['description'])+'</p><a href="'+escape(t['url'])+'" aria-label="Open '+escape(t['title'])+'">Open tool</a></article>' for t in items)
+filters = ''.join('<button type="button" data-filter="'+escape(value)+'" aria-pressed="'+str(i == 0).lower()+'">'+escape(label)+'</button>' for i,(value,label) in enumerate(CATEGORIES))
+hero = read('src/v3/hero.svg')
+home = '''<div class="tp-home"><section class="tp-hero" aria-labelledby="tp-hero-title"><div class="tp-wrap tp-hero-grid"><div><p class="tp-eyebrow tp-eyebrow-badge">A little clarity goes a long way</p><h1 id="tp-hero-title">Smart Tools.<span>Simple Solutions.</span></h1><p class="tp-lead">Turn everyday numbers into your next good decision. Free tools for marketing, commerce, and creative work.</p><div class="tp-hero-actions"><a class="tp-button" href="#tools">Find your tool <span aria-hidden="true">→</span></a><a class="tp-text-link" href="'''+BLOG+'''/p/about.html">Made for everyday work →</a></div><div class="tp-trust"><span>'''+check+'''Free to use</span><span>'''+check+'''No sign-up</span><span>'''+check+'''Runs in your browser</span></div></div><figure class="tp-art">'''+hero+'''</figure></div></section><div class="tp-wrap tp-benefits"><div class="tp-benefit"><span class="tp-benefit-icon">'''+icon('Digital Marketing Calculators')+'''</span><div><strong>Less guesswork</strong>Clear inputs. Useful answers.</div></div><div class="tp-benefit"><span class="tp-benefit-icon">'''+icon('E-commerce Calculators')+'''</span><div><strong>Built for your workflow</strong>From your next campaign to your next print.</div></div><div class="tp-benefit"><span class="tp-benefit-icon">'''+icon('Image & PDF Tools')+'''</span><div><strong>Private by design</strong>Your calculations stay in your browser.</div></div></div><section class="tp-wrap tp-catalog" id="tools" aria-labelledby="tools-title"><div class="tp-catalog-top"><div><p class="tp-eyebrow">Your everyday toolkit</p><h2 id="tools-title">A clear answer starts here.</h2><p class="tp-section-description">Pick a tool and get straight to what matters.</p></div><div class="tp-search"><label for="tool-search">Search the toolkit</label><input id="tool-search" type="search" placeholder="Try profit, marketing, or print…" autocomplete="off"/></div></div><div class="tp-filters" role="group" aria-label="Filter tools by category">'''+filters+'''</div><p class="tp-status" id="search-status" role="status" aria-live="polite">'''+str(len(TOOLS))+''' tools available</p><div class="tp-cards">'''+cards(TOOLS)+'''</div><div class="tp-empty" id="no-tools" hidden="hidden"><p>No tools match this selection. Try a broader search or another category.</p><button type="button" id="tp-clear-filters">Clear search and filters</button></div><div class="tp-note"><div><p class="tp-eyebrow">Useful tools. Clear thinking.</p><h2>The answer, with the working.</h2></div><p>Understand the result with formulas, practical examples, and helpful notes. Use the right units, check your assumptions, and make your next move with confidence.</p></div><noscript><p>All available tools are linked above. Enable JavaScript to use search, filters, and interactive tools.</p></noscript></section></div>'''
+footer = '<footer class="tp-footer"><div class="tp-wrap tp-footer-row"><div><a class="tp-brand" href="'+BLOG+'/">'+brand+'</a><p>Smart tools for thoughtful decisions.<br/>A simpler way to work out what comes next.</p></div><nav class="tp-footer-links" aria-label="Footer navigation"><a href="'+BLOG+'/p/about.html">About</a><a href="'+BLOG+'/p/contact.html">Contact</a><a href="'+BLOG+'/p/privacy-policy.html">Privacy Policy</a><a href="'+BLOG+'/p/terms.html">Terms</a></nav></div><div class="tp-wrap tp-footer-bottom"><span>ToolPivio · Smart Tools. Simple Solutions.</span><span>Free to use. Built for clarity.</span></div></footer>'
+base = read('ToolPivio_Restored_Design_v2.xml')
+base_tree = ET.fromstring(base)
+blog_before = ET.tostring(base_tree.find('.//b:widget[@id="Blog1"]', NS))
+css = read('src/v3/styles.css')
+xml = base.replace(']]></b:skin>', '\n'+css+'\n]]></b:skin>', 1)
+xml = re.sub(r'<header class="tp-header">.*?</header>', lambda _: header_theme, xml, count=1, flags=re.S)
+xml = re.sub(r'<b:if cond="data:view.isHomepage"><div class="tp-home">.*?</div><style type="text/css">body #page_body\{display:none!important\}</style></b:if>', lambda _: '<b:if cond="data:view.isHomepage">'+home+'<style type="text/css">body #page_body{display:none!important}</style></b:if><b:if cond="data:view.isPage"><nav class="tp-breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span><data:view.title.escaped/></span></nav></b:if>', xml, count=1, flags=re.S)
+# Retain legacy native-placeholder calculators, replacing only their old catalog filter.
+legacy = list(base_tree.findall('.//h:script[@type="text/javascript"]', NS))[-1].text
+legacy = re.sub(r"var search=document.getElementById\('tool-search'\).*?(?=var definitions=)", '', legacy, count=1, flags=re.S)
+sitejs = read('src/v3/site.js')
+scripts = '<script type="text/javascript">'+cdata(legacy+'\n'+sitejs)+'</script><script defer="defer" src="'+PAGES+'catalog.v3.js"></script>'
+start = xml.index('<footer class="tp-footer">')
+xml = xml[:start] + footer + scripts + '</body>\n</html>\n'
+seo_head = '''<b:if cond="data:view.isHomepage and !data:blog.metaDescription"><meta name="description" content="Free online calculators for marketing, commerce and print projects. Clear inputs, practical formulas and useful answers."/></b:if><meta property="og:site_name" content="ToolPivio"/><meta property="og:title" expr:content="data:view.title.escaped"/><meta property="og:url" expr:content="data:blog.canonicalUrl"/><meta property="og:type" content="website"/><b:if cond="data:blog.metaDescription"><meta property="og:description" expr:content="data:blog.metaDescription"/></b:if><b:if cond="data:view.isHomepage"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://toolpivio.blogspot.com/#website","name":"ToolPivio","url":"https://toolpivio.blogspot.com/"},{"@type":"Organization","@id":"https://toolpivio.blogspot.com/#organization","name":"ToolPivio","url":"https://toolpivio.blogspot.com/"}]}</script></b:if>'''
+xml = xml.replace('</head>', seo_head + '</head>', 1)
+assert blog_before == ET.tostring(ET.fromstring(xml).find('.//b:widget[@id="Blog1"]',NS)), 'Native Blog1 changed'
+write('releases/ToolPivio_V3_Ready_For_Blogger.xml', xml)
+public_tools = [{k:t[k] for k in ['id','title','description','category','categories','icon','url'] if k in t} for t in TOOLS]
+write('docs/catalog.v3.js', '/* Generated by scripts/build.py; v3 catalog protocol. */\nwindow.ToolPivioCatalog='+json.dumps({'version':3,'tools':public_tools},ensure_ascii=False).replace('<','\\u003c')+';\nwindow.dispatchEvent(new Event("toolpivio:catalog"));\n')
+base_css = base[base.index('/* ===== ToolPivio design overrides ===== */'):base.index(']]></b:skin>')]
+site_head = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolPivio — Free Calculators &amp; Online Tools</title><meta name="description" content="Free browser calculators for marketing, commerce and print projects. Explore useful tools with clear formulas and examples."/><link rel="canonical" href="'+BLOG+'/"/><style>html,body{margin:0;font:16px/1.6 system-ui,sans-serif}a{color:#087f75}button,input{font:inherit}svg{max-width:100%}'+base_css+'\n'+css+'</style></head><body>'
+site_head=site_head.replace('</head>', '<script type="application/ld+json">'+json.dumps({'@context':'https://schema.org','@type':'WebSite','name':'ToolPivio','url':BLOG+'/'})+'</script></head>')
+site = site_head+header.replace(BLOG+'/#tools','#tools')+'<main id="main">'+home+'</main>'+footer+'<script>'+sitejs+'</script></body></html>\n'
+write('dist/preview.html', site)
+write('docs/index.html', site)
+print('Built V3 Blogger release, static preview, hosted catalog and catalog.v3.js; trusted V2 and legacy dist XML unchanged.')
