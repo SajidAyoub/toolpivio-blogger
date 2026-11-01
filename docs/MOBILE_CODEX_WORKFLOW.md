@@ -1,46 +1,29 @@
-# ToolPivio — Mobile Codex workflow
+# ToolPivio — Codex on Desktop or Mobile
 
-You can use your existing Cloud environment from the ChatGPT mobile app's Codex area (if visible in your account) or https://chatgpt.com/codex in a mobile browser. Sign in to the same ChatGPT account. Select **Cloud** and **toolpivio-blogger**; select base branch **main**. No Windows PC is required for a cloud task.
+## What is ready (verified November 1, 2026)
+- Codex connected to GitHub repo `SajidAyoub/toolpivio-blogger`; select existing Cloud environment and branch `main`.
+- GitHub Pages hosts functioning calculators: ROAS, Profit Margin, Print DPI.
+- GitHub Actions + Blogger API + renewed Production OAuth deploy changed existing Blogger pages after an approved PR is merged to `main`.
+- The live Blogger theme was uploaded separately from local XML and is `ToolPivio_Restored_Design_v2.xml` at repository root. **Do not use old generated `dist/toolpivio.xml`.**
+- Read `AGENTS.md` and `docs/CODEX_SITE_MASTER_PLAN.md` for current instructions.
 
-## Start a task
-Sample command to paste into Codex:
+## Mobile
+1. Open https://chatgpt.com/codex with your ChatGPT account or supported mobile interface.
+2. Select Cloud environment for `toolpivio-blogger`, base `main`.
+3. Paste a bounded task command: "Read AGENTS.md and docs/CODEX_SITE_MASTER_PLAN.md. Do Phase A only: improve V2 theme into V3 with original hero SVG, responsive UI, functional category catalog, and calculator iframe UI polish. Preserve native Blogger widget. Run tests. Make a PR to main. Do NOT merge or call the theme live; give manual theme upload steps."
+4. Review files/checks in PR. If approved, merge. Calculator source/Page HTML approved merges deploy using their respective GitHub pipeline. The theme XML must still be uploaded separately from Blogger Theme dashboard.
 
-> Work on SajidAyoub/toolpivio-blogger, using main as base. Read AGENTS.md first. Improve the existing ROAS Calculator page's explanatory content, keeping its data-tool marker unchanged. Validate relevant files. Create a pull request targeting main. Do not modify the theme and do not merge on my behalf. Return the PR link.
+## Restrictions and known issues
+- Cloud environment must be selected. Codex tasks running locally on your PC will not continue if the machine shuts down.
+- New Blogger page titles/slugs and GitHub Actions allowlist must be registered; do not assume new files automatically publish.
+- Avoid repeated heading and internal scrollbar in existing iframe pages, but preserve working calculations.
+- Do not paste `secrets/token.json`, `secrets/oauth_client.json`, any client secret, authorization code, or GitHub Actions secrets into chat.
+- Any change to theme layout must be manually verified and installed; no theme upload in current Blogger API workflow.
+- Google Search Console property verification and some SEO settings need the owner's manual actions.
 
-## Approve and publish from phone
-1. Review the Codex PR and changed files in the GitHub mobile app or browser.
-2. Merge to **main** if approved.
-3. For modified known `pages/*.html`, GitHub Actions automatically runs **Publish ToolPivio Blogger Pages**, validates source, then updates only affected pages using the stored encrypted `BLOGGER_AUTH_JSON` secret.
-4. Check the GitHub Actions run. If red, read logs and ask Codex to fix; do not share token values.
-5. Page content visibility is currently a separate outstanding theme issue; green Actions only proves that the API operation completed.
-
-## Important limits
-- Theme layout, CSS, calculator runtime, site header/footer: Codex may prepare PRs from phone, but **Blogger theme deployment remains manual** (the Blogger API doesn't expose XML theme deployment in this setup).
-- New tool pages require changes to page registry, navigation and/or calculator runtime; no claims of one-click publishing until that process has been configured and verified.
-- GitHub PR #3 is an unverified Blogger theme page-body rendering repair awaiting a desktop session.
-- If the phone cannot show Codex Cloud, use https://chatgpt.com/codex in your mobile browser with the same signed-in account. Availability of UI entry points can vary.
-- Don't send `secrets/oauth_client.json`, `secrets/token.json`, or GitHub Actions secret into Codex prompts or chats.
-
-## Useful links
-- Repo: https://github.com/SajidAyoub/toolpivio-blogger
-- Codex: https://chatgpt.com/codex
-- PRs: https://github.com/SajidAyoub/toolpivio-blogger/pulls
-- Actions: https://github.com/SajidAyoub/toolpivio-blogger/actions/workflows/blogger-pages.yml
-- Live website: https://toolpivio.blogspot.com/
-- Unverified Blogger theme fix: https://github.com/SajidAyoub/toolpivio-blogger/pull/3
-
-## Preferred calculator workflow (Nov 2026)
-1. Source files: `src/calculators.js`, `src/app.js`, `src/styles.css`, `src/embed_template.html`.
-2. On calculator changes, run `python scripts/build_embed.py` to regenerate `docs/embed.html`; CI checks that generated file matches source.
-3. GitHub Pages must be enabled (Settings → Pages → Deploy from a branch → main → /docs). Existing Blogger pages embed `docs/embed.html?tool=...` from hosted GitHub Pages after PR #4 is merged.
-4. With this setup, editing calculators via Codex and merging PR updates GitHub Pages automatically; editing known Blogger page texts auto-publishes through Blogger API. **Theme XML still needs manual upload** if redesigned.
-5. PR #4 is pending live GitHub Pages enable/verification; do not merge blindly while embed URL is unavailable.
-
-
-## CONFIRMED LIVE — November 1, 2026 (current instructions)
-- GitHub Pages /docs is enabled, and PR #4 is merged. The three calculators are functional live on Blogger, including Calculate and Reset. Earlier warnings above about pending PR #4 and blank page body are historical.
-- For calculator functionality changes: edit source, run `python scripts/build_embed.py` and tests, commit `docs/embed.html` with changed sources, open PR; after merge, GitHub Pages deploys updated runtime. Blogger Page HTML does not need republishing unless its explanatory text or iframe URL changes.
-- For changes to any of the seven existing Blogger pages: edit `pages/*.html`, open PR; merge triggers existing Blogger API deployment. The Google production OAuth token is stored in GitHub Actions secret; NEVER include it in prompts, output, or commits.
-- For layout/header/footer/category card changes: live Contempo-based ToolPivio V2 theme must be preserved. Old `dist/toolpivio.xml` is not the installed theme. Ask the owner to add the live V2 XML to GitHub before attempting a theme redesign; theme changes then require a manual Blogger upload.
-- Known UI polish items for next Codex task: avoid duplicate H1/iframe heading and eliminate Print DPI iframe nested scrollbar without breaking calculator tests or SEO article text.
-- Suggested phone/desktop task prompt: "In SajidAyoub/toolpivio-blogger on main, read AGENTS.md, improve [specific calculator], keep current Blogger V2 styling and existing live pages intact, regenerate docs/embed.html, run checks, create PR, do not merge. Tell me what will deploy automatically vs require manual theme action."
+## Links
+- [Codex Cloud](https://chatgpt.com/codex)
+- [GitHub repository](https://github.com/SajidAyoub/toolpivio-blogger)
+- [Open PRs](https://github.com/SajidAyoub/toolpivio-blogger/pulls)
+- [GitHub Actions publishing](https://github.com/SajidAyoub/toolpivio-blogger/actions/workflows/blogger-pages.yml)
+- [ToolPivio Blogger](https://toolpivio.blogspot.com/)
