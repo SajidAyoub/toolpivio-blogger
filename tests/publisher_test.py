@@ -108,6 +108,44 @@ class PublisherTests(unittest.TestCase):
             blogger_publish.sync_pages(service, "blog", pages, True, True)
         service.pages.assert_not_called()
 
+    def test_rate_limit_retries_only_http_429(self):
+        service = MagicMock()
+        request = service.pages().insert()
+        class RateLimitError(Exception):
+            resp = type("Response", (), {"status": 429})()
+        request.execute.side_effect = [RateLimitError("quota"), {"url": "ok"}]
+        with patch.object(blogger_publish.time, "sleep") as sleep, contextlib.redirect_stdout(io.StringIO()):
+            output = blogger_publish.execute_with_rate_limit_retry(request)
+        self.assertEqual(output, {"url": "ok"})
+        self.assertEqual(request.execute.call_count, 2)
+        sleep.assert_called_once_with(30)
+
+    def test_non_quota_error_does_not_retry(self):
+        service = MagicMock()
+        request = service.pages().insert()
+        request.execute.side_effect = ValueError("unauthorized")
+        with patch.object(blogger_publish.time, "sleep") as sleep:
+            with self.assertRaisesRegex(ValueError, "unauthorized"):
+                blogger_publish.execute_with_rate_limit_retry(request)
+        request.execute.assert_called_once()
+        sleep.assert_not_called()
+
+    def test_write_interval_only_between_writes(self):
+        service = MagicMock()
+        first = ("A", "body", "/p/a.html", "pages/a.html")
+        second = ("B", "body", "/p/b.html", "pages/b.html")
+        service.pages().insert().execute.side_effect = [
+            {"url": "https://toolpivio.blogspot.com/p/a.html"},
+            {"url": "https://toolpivio.blogspot.com/p/b.html"},
+        ]
+        with patch.object(blogger_publish, "existing_pages", return_value=[]):
+            with patch.object(blogger_publish.time, "sleep") as sleep:
+                with patch.object(blogger_publish.time, "monotonic", side_effect=[100, 101, 116]):
+                    with contextlib.redirect_stdout(io.StringIO()):
+                        blogger_publish.sync_pages(service, "blog", [first, second], apply=True,
+                                                  write_interval_seconds=15)
+        sleep.assert_called_once_with(14)
+
     def test_existing_pages_fetches_live_draft_and_pagination(self):
         service = MagicMock()
         service.pages().list().execute.side_effect = [{"items":[{"id":"1"}],"nextPageToken":"next"},{"items":[{"id":"2"}]},{"items":[{"id":"3"}]}]
